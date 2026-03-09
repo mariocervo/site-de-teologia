@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Professor Mario Gabriel | Teologia e Bíblia</title>
+
+<meta name="description" content="Aprenda Teologia e Bíblia de forma clara e profunda com o Prof. Mario Gabriel. Ebooks e cursos especializados.">
+<meta name="keywords" content="teologia, bíblia, ebooks, cursos, escatologia, hermenêutica, mario gabriel">
+<meta name="author" content="Mario Gabriel Spineti de Carvalho">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script>
+tailwind.config = {
+theme: {
+extend: {
+fontFamily: {
+sans: ['Inter', 'sans-serif'],
+},
+colors: {
+brand: {
+black: '#0A0A0A',
+dark: '#141414',
+gold: '#D4AF37',
+goldlight: '#F3D568',
+golddark: '#AA8A25',
+white: '#FFFFFF',
+gray: '#888888',
+light: '#F5F5F5'
+}
+}
+}
+}
+}
+</script>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://unpkg.com/lucide@latest"></script>
+
+</head>
+
+<body class="bg-brand-black text-brand-light font-sans antialiased overflow-x-hidden selection:bg-brand-gold selection:text-brand-black">
+
+<!-- NAVBAR -->
+
+<nav class="fixed w-full z-50 top-0 backdrop-blur-md bg-brand-black/80 border-b border-white/10" id="navbar">
+
+<div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+
+<a href="#" class="text-xl font-bold text-brand-white flex items-center gap-2">
+
+<span class="w-8 h-8 rounded bg-brand-gold text-brand-black flex items-center justify-center font-bold text-lg">M</span>
+
+Mario Gabriel
+
+</a>
+
+<div class="hidden md:flex gap-8 text-sm font-medium text-brand-gray">
+
+<a href="#destaques" class="hover:text-brand-gold">Destaques</a>
+<a href="#catalogo" class="hover:text-brand-gold">Catálogo</a>
+<a href="#cursos" class="hover:text-brand-gold">Cursos</a>
+<a href="#artigos" class="hover:text-brand-gold">Artigos</a>
+<a href="#sobre" class="hover:text-brand-gold">Sobre</a>
+<a href="#depoimentos" class="hover:text-brand-gold">Depoimentos</a>
+
+</div>
+
+<button class="md:hidden text-brand-white" id="menu-btn">
+<i data-lucide="menu"></i>
+</button>
+
+</div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<section id="hero" class="min-h-screen flex items-center justify-center pt-20">
+
+<div class="max-w-5xl mx-auto px-6 text-center">
+
+<h1 class="text-5xl md:text-7xl font-bold text-brand-white mb-6">
+
+Aprenda Teologia e Bíblia de forma
+
+<span class="text-brand-gold">clara e profunda</span>
+
+</h1>
+
+<p class="text-lg text-brand-gray mb-10">
+
+Descubra as riquezas das Escrituras através de materiais desenvolvidos para edificar sua fé.
+
+</p>
+
+<a href="#catalogo" class="px-8 py-4 rounded-full bg-brand-gold text-brand-black font-bold">
+
+Ver Ebooks
+
+</a>
+
+</div>
+
+</section>
+
+
+<!-- DESTAQUES -->
+
+<section id="destaques" class="py-24 bg-brand-black">
+
+<div class="max-w-7xl mx-auto px-6">
+
+<h2 class="text-4xl text-brand-white mb-12">
+
+Ebooks em Destaque
+
+</h2>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="destaques-grid"></div>
+
+</div>
+
+</section>
+
+
+<!-- CATÁLOGO -->
+
+<section id="catalogo" class="py-24 bg-brand-dark">
+
+<div class="max-w-7xl mx-auto px-6">
+
+<h2 class="text-4xl text-brand-white text-center mb-12">
+
+Biblioteca Digital
+
+</h2>
+
+<div id="category-filters" class="flex justify-center gap-3 mb-12"></div>
+
+<div id="catalogo-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+
+</div>
+
+</section>
+
+
+<!-- CURSOS -->
+
+<section id="cursos" class="py-24 bg-brand-black">
+
+<div class="max-w-7xl mx-auto px-6">
+
+<h2 class="text-4xl text-brand-white text-center mb-12">
+
+Cursos Online
+
+</h2>
+
+<div id="courses-container" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
+
+</div>
+
+</section>
+
+
+<!-- ARTIGOS -->
+
+<section id="artigos" class="py-24 bg-brand-dark">
+
+<div class="max-w-7xl mx-auto px-6">
+
+<h2 class="text-4xl text-brand-white text-center mb-12">
+
+Conteúdo Gratuito
+
+</h2>
+
+<div id="articles-container" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
+
+</div>
+
+</section>
+
+
+<!-- SOBRE -->
+
+<section id="sobre" class="py-24 bg-brand-black">
+
+<div class="max-w-7xl mx-auto px-6">
+
+<div class="flex flex-col lg:flex-row items-center gap-16">
+
+<div class="w-full lg:w-1/2">
+
+<img src="img/mario.webp" alt="Mario Gabriel"
+class="w-full max-w-md mx-auto rounded-2xl border border-white/10 shadow-2xl object-cover aspect-square">
+
+</div>
+
+<div class="w-full lg:w-1/2">
+
+<h2 class="text-4xl text-brand-white mb-6">
+
+Mario Gabriel Spineti de Carvalho
+
+</h2>
+
+<p class="text-brand-gray text-lg leading-relaxed">
+
+Dedico minha vida a ensinar a Bíblia e a teologia de forma acessível e profunda.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- DEPOIMENTOS -->
+
+<section id="depoimentos" class="py-24 bg-brand-dark">
+
+<div class="max-w-7xl mx-auto px-6">
+
+<h2 class="text-4xl text-brand-white text-center mb-12">
+
+O que dizem os alunos
+
+</h2>
+
+<div id="depoimentos-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
+
+</div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer class="bg-[#050505] pt-16 pb-8 border-t border-white/10 text-brand-gray">
+
+<div class="max-w-7xl mx-auto px-6 text-center">
+
+<p>© 2026 Mario Gabriel Spineti de Carvalho</p>
+
+</div>
+
+</footer>
+
+
+<!-- SCRIPT PRINCIPAL -->
+
+<script type="module" src="app.js"></script>
+
+
+<!-- LUCIDE ICONS -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+lucide.createIcons();
+
+});
+
+</script>
+
+
+</body>
+</html>
