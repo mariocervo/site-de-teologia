@@ -1,4 +1,5 @@
 // data.js
+
 export const categories = [
     { id: 'todos', name: 'Todos' },
     { id: 'teologia', name: 'Teologia' },
@@ -6,6 +7,8 @@ export const categories = [
     { id: 'hermeneutica', name: 'Hermenêutica' },
     { id: 'estudo-biblico', name: 'Estudo Bíblico' }
 ];
+
+
 
 export const ebooks = [
     {
@@ -40,69 +43,75 @@ export const ebooks = [
     }
 ];
 
+
+
 export const courses = [
     {
         id: 'c1',
-        title: '#',
-        description: '#',
-        image: '#',
-        tags: ['#'],
-        link: '#'
+        title: '',
+        description: '',
+        image: '',
+        tags: [],
+        link: ''
     },
     {
         id: 'c2',
-        title: '#',
-        description: '#',
-        image: '#',
-        tags: ['#'],
-        link: '#'
+        title: '',
+        description: '',
+        image: '',
+        tags: [],
+        link: ''
     }
 ];
+
+
 
 export const articles = [
     {
         id: 'a1',
-        title: '#',
-        date: '#',
-        category: '#',
-        image: '#'
+        title: '',
+        date: '',
+        category: '',
+        image: ''
     },
     {
         id: 'a2',
-        title: '#',
-        date: '#',
-        category: '#',
-        image: '#'
+        title: '',
+        date: '',
+        category: '',
+        image: ''
     },
     {
         id: 'a3',
-        title: '#',
-        date: '#',
-        category: '#',
-        image: '#'
+        title: '',
+        date: '',
+        category: '',
+        image: ''
     }
 ];
+
+
 
 export const testimonials = [
     {
         id: 1,
-        name: '#',
-        role: '#',
-        text: '#',
+        name: '',
+        role: '',
+        text: '',
         rating: 5
     },
     {
         id: 2,
-        name: '#',
-        role: '#',
-        text: '#',
+        name: '',
+        role: '',
+        text: '',
         rating: 5
     },
     {
         id: 3,
-        name: '#',
-        role: '#',
-        text: '#',
+        name: '',
+        role: '',
+        text: '',
         rating: 5
     }
 ];
