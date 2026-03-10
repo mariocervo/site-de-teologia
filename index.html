@@ -8,10 +8,6 @@
 
 <title>Professor Mario Gabriel | Teologia e Bíblia</title>
 
-<meta name="description" content="Aprenda Teologia e Bíblia de forma clara e profunda com o Prof. Mario Gabriel. Ebooks e cursos especializados.">
-<meta name="keywords" content="teologia, bíblia, ebooks, cursos, escatologia, hermenêutica, mario gabriel">
-<meta name="author" content="Mario Gabriel Spineti de Carvalho">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -21,21 +17,20 @@
 
 <script>
 tailwind.config = {
-theme: {
-extend: {
-fontFamily: {
-sans: ['Inter', 'sans-serif'],
+theme:{
+extend:{
+fontFamily:{
+sans:['Inter','sans-serif']
 },
-colors: {
-brand: {
-black: '#0A0A0A',
-dark: '#141414',
-gold: '#D4AF37',
-goldlight: '#F3D568',
-golddark: '#AA8A25',
-white: '#FFFFFF',
-gray: '#888888',
-light: '#F5F5F5'
+colors:{
+brand:{
+black:'#0A0A0A',
+dark:'#141414',
+gold:'#D4AF37',
+goldlight:'#F3D568',
+white:'#FFFFFF',
+gray:'#888888',
+light:'#F5F5F5'
 }
 }
 }
@@ -45,29 +40,24 @@ light: '#F5F5F5'
 
 <link rel="stylesheet" href="style.css">
 
-<!-- LUCIDE ICONS -->
 <script src="https://unpkg.com/lucide@latest"></script>
 
 </head>
 
-
-<body class="bg-brand-black text-brand-light font-sans antialiased overflow-x-hidden">
+<body class="bg-brand-black text-brand-light font-sans">
 
 <!-- NAVBAR -->
 
-<nav class="fixed w-full z-50 top-0 backdrop-blur-md bg-brand-black/80 border-b border-white/10">
+<nav class="fixed w-full top-0 bg-brand-black/80 backdrop-blur border-b border-white/10 z-50">
 
 <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
-<a href="#" class="text-xl font-bold text-brand-white flex items-center gap-2">
-
-<span class="w-8 h-8 rounded bg-brand-gold text-brand-black flex items-center justify-center font-bold text-lg">M</span>
-
+<a href="#" class="text-xl font-bold text-white flex items-center gap-2">
+<span class="w-8 h-8 bg-brand-gold text-black rounded flex items-center justify-center font-bold">M</span>
 Mario Gabriel
-
 </a>
 
-<div class="hidden md:flex gap-8 text-sm font-medium text-brand-gray">
+<div class="hidden md:flex gap-8 text-sm text-gray-400">
 
 <a href="#destaques" class="hover:text-brand-gold">Destaques</a>
 <a href="#catalogo" class="hover:text-brand-gold">Catálogo</a>
@@ -78,9 +68,9 @@ Mario Gabriel
 
 </div>
 
-<button class="md:hidden text-brand-white">
-<i data-lucide="menu"></i>
-</button>
+<a href="#catalogo" class="hidden md:block px-5 py-2 rounded-full bg-brand-gold text-black font-semibold">
+Ver Ebooks
+</a>
 
 </div>
 
@@ -91,27 +81,36 @@ Mario Gabriel
 
 <section class="min-h-screen flex items-center justify-center pt-20">
 
-<div class="max-w-5xl mx-auto px-6 text-center">
+<div class="text-center max-w-4xl px-6">
 
-<h1 class="text-5xl md:text-7xl font-bold text-brand-white mb-6">
-
+<h1 class="text-5xl md:text-7xl font-bold text-white mb-6">
 Aprenda Teologia e Bíblia de forma
-
 <span class="text-brand-gold">clara e profunda</span>
-
 </h1>
 
-<p class="text-lg text-brand-gray mb-10">
-
-Descubra as riquezas das Escrituras através de materiais desenvolvidos para edificar sua fé.
-
+<p class="text-lg text-gray-400 mb-10">
+Descubra as riquezas das Escrituras através de materiais desenvolvidos para fortalecer sua fé.
 </p>
 
-<a href="#catalogo" class="px-8 py-4 rounded-full bg-brand-gold text-brand-black font-bold">
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
 
+<a href="#catalogo"
+class="px-8 py-4 rounded-full bg-brand-gold text-black font-bold flex items-center gap-2">
+
+<i data-lucide="book-open"></i>
 Ver Ebooks
 
 </a>
+
+<a href="#cursos"
+class="px-8 py-4 rounded-full bg-brand-dark border border-white/10 text-white flex items-center gap-2">
+
+<i data-lucide="graduation-cap"></i>
+Ver Cursos
+
+</a>
+
+</div>
 
 </div>
 
@@ -120,39 +119,51 @@ Ver Ebooks
 
 <!-- DESTAQUES -->
 
-<section id="destaques" class="py-24 bg-brand-black">
+<section id="destaques" class="py-24 border-t border-white/5">
 
 <div class="max-w-7xl mx-auto px-6">
 
-<h2 class="text-4xl text-brand-white mb-12">
+<h2 class="text-4xl text-white mb-12">Ebooks em Destaque</h2>
 
-Ebooks em Destaque
-
-</h2>
-
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="destaques-grid"></div>
+<div id="destaques-grid" class="grid md:grid-cols-3 gap-8"></div>
 
 </div>
 
 </section>
 
 
-<!-- CATÁLOGO -->
+<!-- CATALOGO -->
 
 <section id="catalogo" class="py-24 bg-brand-dark">
 
-<div class="max-w-7xl mx-auto px-6">
+<div class="max-w-7xl mx-auto px-6 text-center">
 
-<h2 class="text-4xl text-brand-white text-center mb-12">
+<h2 class="text-4xl text-white mb-10">Biblioteca Digital</h2>
 
-Biblioteca Digital
+<div id="catalogo-grid" class="grid md:grid-cols-4 gap-6"></div>
 
-</h2>
+</div>
 
-<div id="category-filters" class="flex justify-center gap-3 mb-12"></div>
+</section>
 
-<div id="catalogo-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
 
+<!-- CURSOS -->
+
+<section id="cursos" class="py-24">
+
+<div class="text-center">
+<h2 class="text-4xl text-white">Cursos de Teologia</h2>
+</div>
+
+</section>
+
+
+<!-- ARTIGOS -->
+
+<section id="artigos" class="py-24 bg-brand-dark">
+
+<div class="text-center">
+<h2 class="text-4xl text-white">Artigos Bíblicos</h2>
 </div>
 
 </section>
@@ -160,37 +171,23 @@ Biblioteca Digital
 
 <!-- SOBRE -->
 
-<section id="sobre" class="py-24 bg-brand-black">
+<section id="sobre" class="py-24">
 
-<div class="max-w-7xl mx-auto px-6">
+<div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
 
-<div class="flex flex-col lg:flex-row items-center gap-16">
+<img src="img/autor/mario.webp" class="rounded-2xl border border-white/10">
 
-<div class="w-full lg:w-1/2">
+<div>
 
-<img src="img/autor/mario.webp" alt="Mario Gabriel"
-class="w-full max-w-md mx-auto rounded-2xl border border-white/10 shadow-2xl object-cover aspect-square">
+<h2 class="text-4xl text-white mb-6">Mario Gabriel Spineti de Carvalho</h2>
 
-</div>
-
-
-<div class="w-full lg:w-1/2">
-
-<h2 class="text-4xl text-brand-white mb-6">
-
-Mario Gabriel Spineti de Carvalho
-
-</h2>
-
-<p class="text-brand-gray text-lg leading-relaxed mb-6">
-
+<p class="text-gray-400 mb-6">
 Aos 28 anos, Bacharel em Teologia pelo SEMINAD (Seminário Internacional da Assembleia de Deus), dedico minha vida a ensinar a Bíblia e a teologia de forma acessível, sem perder a profundidade que as Escrituras exigem.
-
 </p>
 
-<p class="text-brand-gray text-lg leading-relaxed mb-10">
-
+<p class="text-gray-400 mb-10">
 Meu maior objetivo é ajudar pessoas comuns, líderes e pastores a compreenderem a Palavra de Deus em sua essência, capacitando-os a viverem uma fé robusta, fundamentada nas Escrituras e na tradição cristã.
+</p>
 
 </p>
 
@@ -257,15 +254,25 @@ Estudos fundamentados em exegese e hermenêutica séria.
 
 <section id="depoimentos" class="py-24 bg-brand-dark">
 
-<div class="max-w-7xl mx-auto px-6">
+<div class="max-w-7xl mx-auto px-6 text-center">
 
-<h2 class="text-4xl text-brand-white text-center mb-12">
+<h2 class="text-4xl text-white mb-4">O que dizem os leitores</h2>
 
-O que dizem os alunos
+<p class="text-gray-400 mb-10">
+Inúmeras pessoas já transformaram suas vidas com nossos materiais.
+</p>
 
-</h2>
+<button id="btnAvaliar"
+class="px-8 py-4 rounded-full bg-brand-gold text-black font-bold flex items-center gap-2 mx-auto">
 
-<div id="depoimentos-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
+<i data-lucide="arrow-right"></i>
+Deixe sua avaliação
+
+</button>
+
+<div id="contadorAvaliacoes" class="mt-4 text-gray-400"></div>
+
+<div id="depoimentos-grid" class="grid md:grid-cols-3 gap-8 mt-12"></div>
 
 </div>
 
@@ -274,32 +281,74 @@ O que dizem os alunos
 
 <!-- FOOTER -->
 
-<footer class="bg-[#050505] pt-16 pb-8 border-t border-white/10 text-brand-gray">
+<footer class="bg-black pt-16 pb-8 border-t border-white/10">
 
-<div class="max-w-7xl mx-auto px-6 text-center">
+<div class="max-w-7xl mx-auto px-6">
 
-<p>© 2026 Mario Gabriel Spineti de Carvalho</p>
+<h3 class="text-brand-white font-semibold mb-4 uppercase text-sm tracking-wider">
+Contato
+</h3>
+
+<ul class="space-y-3 text-gray-400">
+
+<li>
+<a href="https://wa.me/5517991996793" target="_blank" class="flex items-center gap-2 hover:text-brand-gold transition-colors">
+<i data-lucide="message-circle" class="w-4 h-4"></i> WhatsApp
+</a>
+</li>
+
+<li>
+<a href="https://instagram.com/prof.mariogabriel" target="_blank" class="flex items-center gap-2 hover:text-brand-gold transition-colors">
+<i data-lucide="instagram" class="w-4 h-4"></i> Instagram
+</a>
+</li>
+
+<li>
+<a href="https://facebook.com/MarioGSCarvalho" target="_blank" class="flex items-center gap-2 hover:text-brand-gold transition-colors">
+<i data-lucide="facebook" class="w-4 h-4"></i> Facebook
+</a>
+</li>
+
+<li>
+<a href="#" class="flex items-center gap-2 hover:text-brand-gold transition-colors">
+<i data-lucide="globe" class="w-4 h-4"></i> Outros Sites
+</a>
+</li>
+
+</ul>
+
+
+<div class="pt-8 mt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+
+<p>
+© 2026 Mario Gabriel Spineti de Carvalho. Todos os direitos reservados.
+</p>
+
+<div class="mt-4 md:mt-0 flex gap-4">
+
+<a href="#" class="hover:text-brand-white transition-colors">
+Termos de Uso
+</a>
+
+<a href="#" class="hover:text-brand-white transition-colors">
+Privacidade
+</a>
+
+</div>
+
+</div>
 
 </div>
 
 </footer>
 
 
-<!-- SCRIPT PRINCIPAL -->
-
 <script type="module" src="app.js"></script>
 
-
-<!-- ATIVAR ICONES -->
-
 <script>
-
-document.addEventListener("DOMContentLoaded", () => {
-
+document.addEventListener("DOMContentLoaded",()=>{
 lucide.createIcons();
-
 });
-
 </script>
 
 </body>
