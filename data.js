@@ -15,7 +15,7 @@ title:'67 Ideias de Pregações',
 description:'Tem dificuldade em transformar seus conhecimentos bíblicos em pregações impactantes? Com este e-book você terá acesso a esboços prontos.',
 price:'De R$ 97,00 por 6x de R$ 08,82',
 category:'estudo-biblico',
-image:'img/pregacoes.webp',
+image:'img/pregacao.webp',
 hotmartLink:'https://pay.hotmart.com/A104759967E?checkoutMode=10&split=6'
 },
 
@@ -45,3 +45,4 @@ hotmartLink:'https://pay.hotmart.com/R104774512W?checkoutMode=10'
 export const courses = []
 export const articles = []
 export const testimonials = []
+
