@@ -68,7 +68,8 @@ Mario Gabriel
 
 </div>
 
-<a href="#catalogo" class="hidden md:block px-5 py-2 rounded-full bg-brand-gold text-black font-semibold">
+<a href="#catalogo"
+class="hidden md:block px-5 py-2 rounded-full bg-brand-gold text-black font-semibold hover:bg-brand-goldlight hover:scale-105 transition-all shadow-[0_0_15px_rgba(212,175,55,0.3)]">
 Ver Ebooks
 </a>
 
@@ -95,7 +96,7 @@ Descubra as riquezas das Escrituras através de materiais desenvolvidos para for
 <div class="flex flex-col sm:flex-row gap-4 justify-center">
 
 <a href="#catalogo"
-class="px-8 py-4 rounded-full bg-brand-gold text-black font-bold flex items-center gap-2">
+class="px-8 py-4 rounded-full bg-brand-gold text-black font-bold flex items-center gap-2 hover:bg-brand-goldlight hover:scale-105 transition-all shadow-[0_0_20px_rgba(212,175,55,0.4)]">
 
 <i data-lucide="book-open"></i>
 Ver Ebooks
@@ -103,7 +104,7 @@ Ver Ebooks
 </a>
 
 <a href="#cursos"
-class="px-8 py-4 rounded-full bg-brand-dark border border-white/10 text-white flex items-center gap-2">
+class="px-8 py-4 rounded-full bg-brand-dark border border-white/10 text-white flex items-center gap-2 hover:scale-105 transition-all">
 
 <i data-lucide="graduation-cap"></i>
 Ver Cursos
@@ -182,46 +183,12 @@ Ver Cursos
 <h2 class="text-4xl text-white mb-6">Mario Gabriel Spineti de Carvalho</h2>
 
 <p class="text-gray-400 mb-6">
-Aos 28 anos, Bacharel em Teologia pelo SEMINAD (Seminário Internacional da Assembleia de Deus), dedico minha vida a ensinar a Bíblia e a teologia de forma acessível, sem perder a profundidade que as Escrituras exigem.
+Aos 28 anos, Bacharel em Teologia pelo SEMINAD (Seminário Internacional da Assembleia de Deus), dedico minha vida a ensinar a Bíblia e a teologia de forma acessível.
 </p>
 
 <p class="text-gray-400 mb-10">
-Meu maior objetivo é ajudar pessoas comuns, líderes e pastores a compreenderem a Palavra de Deus em sua essência, capacitando-os a viverem uma fé robusta, fundamentada nas Escrituras e na tradição cristã.
+Meu objetivo é ajudar pessoas a compreenderem a Palavra de Deus em sua essência.
 </p>
-
-<div class="space-y-4">
-
-<div class="flex items-start space-x-4">
-
-<div class="text-brand-gold mt-1">
-<i data-lucide="check-circle-2"></i>
-</div>
-
-<div>
-<h4 class="text-brand-white font-bold">Linguagem Acessível</h4>
-<p class="text-sm text-brand-gray">
-Teologia sem complicações para quem quer aprender de verdade.
-</p>
-</div>
-
-</div>
-
-<div class="flex items-start space-x-4">
-
-<div class="text-brand-gold mt-1">
-<i data-lucide="check-circle-2"></i>
-</div>
-
-<div>
-<h4 class="text-brand-white font-bold">Base Bíblica Sólida</h4>
-<p class="text-sm text-brand-gray">
-Estudos fundamentados em exegese e hermenêutica séria.
-</p>
-</div>
-
-</div>
-
-</div>
 
 </div>
 
@@ -230,158 +197,145 @@ Estudos fundamentados em exegese e hermenêutica séria.
 </section>
 
 
-<!-- DEPOIMENTOS -->
+<!-- DEPOIMENTOS (CORRIGIDO SEM DUPLICAÇÃO) -->
 
-<section id="depoimentos" class="py-24 bg-brand-dark">
+<section id="depoimentos" class="py-24 bg-brand-dark relative">
 
-<div class="max-w-7xl mx-auto px-6 text-center">
+<div class="max-w-7xl mx-auto px-6">
 
-<h2 class="text-4xl text-white mb-4">O que dizem os leitores</h2>
+<div class="text-center mb-16">
 
-<p class="text-gray-400 mb-10">
+<h2 class="text-3xl md:text-4xl font-bold text-brand-white mb-4">
+O que dizem os leitores
+</h2>
+
+<p class="text-brand-gray">
 Inúmeras pessoas já transformaram suas vidas com nossos materiais.
 </p>
 
+</div>
+
+<div style="text-align:center;margin-top:40px;">
+
 <button id="btnAvaliar"
-class="px-8 py-4 rounded-full bg-brand-gold text-black font-bold flex items-center gap-2 mx-auto">
+class="px-8 py-4 rounded-full bg-brand-gold text-black font-bold flex items-center gap-2 mx-auto hover:bg-brand-goldlight hover:scale-105 transition-all shadow-[0_0_20px_rgba(212,175,55,0.4)]">
 
 <i data-lucide="arrow-right"></i>
 Deixe sua avaliação
 
 </button>
 
-<div id="contadorAvaliacoes" class="mt-4 text-gray-400"></div>
+<div id="contadorAvaliacoes" style="margin-top:10px;"></div>
 
-<section id="depoimentos" class="py-24 bg-brand-dark relative">
-    <div class="max-w-7xl mx-auto px-6">
-        
-        <div class="text-center mb-16 reveal">
-            <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-brand-white mb-4">
-                O que dizem os leitores
-            </h2>
-            <p class="text-brand-gray">
-                Inúmeras pessoas já transformaram suas vidas com nossos materiais.
-            </p>
-        </div>
+</div>
 
-        <div style="text-align:center;margin-top:40px;">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16" id="depoimentos-grid"></div>
 
-            <button id="btnAvaliar"
-            class="px-8 py-4 rounded-full bg-brand-gold text-black font-bold flex items-center gap-2 mx-auto hover:bg-brand-goldlight transition-all">
-
-                <i data-lucide="arrow-right"></i>
-                Deixe sua avaliação
-
-            </button>
-
-            <div id="contadorAvaliacoes" style="margin-top:10px;"></div>
-
-        </div>
-
-        <!-- MODAL DE AVALIAÇÃO -->
-        <div id="modalAvaliar" class="modal">
-            <div class="modal-box">
-
-                <h3>Deixe sua avaliação</h3>
-
-                <input 
-                id="nomeUsuario" 
-                placeholder="Seu nome" 
-                maxlength="200">
-
-                <textarea 
-                id="comentarioUsuario" 
-                maxlength="200"
-                placeholder="Escreva seu comentário"></textarea>
-
-                <div class="stars">
-                    <span data-star="1">⭐</span>
-                    <span data-star="2">⭐</span>
-                    <span data-star="3">⭐</span>
-                    <span data-star="4">⭐</span>
-                    <span data-star="5">⭐</span>
-                </div>
-
-                <button id="enviarComentario">
-                    Enviar
-                </button>
-
-            </div>
-        </div>
-
-        <!-- GRID DE DEPOIMENTOS -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="depoimentos-grid">
-        </div>
-
-    </div>
+</div>
 
 </section>
 
+
+<!-- CTA -->
+
+<section class="py-24 bg-brand-black text-center">
+
+<h2 class="text-4xl text-white mb-6">
+Pronto para aprofundar seu conhecimento?
+</h2>
+
+<a href="#catalogo"
+class="px-10 py-5 rounded-full bg-brand-gold text-black font-bold text-xl hover:bg-brand-goldlight hover:scale-105 transition-all shadow-[0_0_30px_rgba(212,175,55,0.3)]">
+
+Explorar Ebooks Agora
+
+</a>
+
+</section>
+
+
+<!-- FOOTER -->
+
 <footer class="bg-[#050505] pt-16 pb-8 border-t border-white/10 text-brand-gray">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-                <div class="md:col-span-2">
-                    <a href="#" class="text-2xl font-bold tracking-tight text-brand-white flex items-center gap-2 mb-4">
-                        <span class="w-8 h-8 rounded bg-brand-gold text-brand-black flex items-center justify-center font-bold text-lg">M</span>
-                        Professor Mario Gabriel
-                    </a>
-                    <p class="mb-6 max-w-sm">Ebooks de alta qualidade selecionados para o seu desenvolvimento contínuo espiritual acadêmico e teológico.</p>
-                </div>
-                <div>
-                    <h3 class="text-brand-white font-semibold mb-4 uppercase text-sm tracking-wider">Navegação</h3>
-                    <ul class="space-y-3">
-                        <li><a href="#destaques" class="hover:text-brand-gold transition-colors">Destaques</a></li>
-                        <li><a href="#catalogo" class="hover:text-brand-gold transition-colors">Catálogo</a></li>
-                        <li><a href="#sobre" class="hover:text-brand-gold transition-colors">Sobre</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-brand-white font-semibold mb-4 uppercase text-sm tracking-wider">Contato</h3>
-                    <ul class="space-y-3">
-                        <li>
-<a href="https://wa.me/5517991996793" target="_blank" class="flex items-center gap-2 hover:text-brand-gold transition-colors">
-<i data-lucide="message-circle" class="w-4 h-4"></i> WhatsApp
+
+<div class="max-w-7xl mx-auto px-6">
+
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+
+<div class="md:col-span-2">
+
+<a href="#" class="text-2xl font-bold text-white flex items-center gap-2 mb-4">
+<span class="w-8 h-8 rounded bg-brand-gold text-black flex items-center justify-center font-bold">M</span>
+Professor Mario Gabriel
+</a>
+
+<p class="max-w-sm">
+Ebooks de alta qualidade selecionados para o seu desenvolvimento contínuo.
+</p>
+
+</div>
+
+<div>
+
+<h3 class="text-white mb-4">Navegação</h3>
+
+<ul class="space-y-3">
+<li><a href="#catalogo">Catálogo</a></li>
+<li><a href="#sobre">Sobre</a></li>
+</ul>
+
+</div>
+
+<div>
+
+<h3 class="text-white mb-4">Contato</h3>
+
+<ul class="space-y-3">
+
+<li>
+<a href="https://wa.me/5517991996793" target="_blank" class="flex items-center gap-2 hover:text-brand-gold">
+<i data-lucide="message-circle"></i> WhatsApp
 </a>
 </li>
 
 <li>
-<a href="https://instagram.com/prof.mariogabriel" target="_blank" class="flex items-center gap-2 hover:text-brand-gold transition-colors">
-<i data-lucide="instagram" class="w-4 h-4"></i> Instagram
+<a href="https://instagram.com/prof.mariogabriel" target="_blank" class="flex items-center gap-2 hover:text-brand-gold">
+<i data-lucide="instagram"></i> Instagram
 </a>
 </li>
 
 <li>
-<a href="https://facebook.com/MarioGSCarvalho" target="_blank" class="flex items-center gap-2 hover:text-brand-gold transition-colors">
-<i data-lucide="facebook" class="w-4 h-4"></i> Facebook
+<a href="https://facebook.com/MarioGSCarvalho" target="_blank" class="flex items-center gap-2 hover:text-brand-gold">
+<i data-lucide="facebook"></i> Facebook
 </a>
 </li>
-                        <!-- NOVO BOTÃO: OUTROS SITES -->
-                        <li>
-                            <a href="#" class="flex items-center gap-2 hover:text-brand-gold transition-colors">
-                                <li>
-<a href="https://mariocervo.github.io/Ebooksvariados/#catalogo"
-target="_blank"
-class="flex items-center gap-2 hover:text-brand-gold transition-colors">
-<i data-lucide="globe"></i> Ebooks variados
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-sm">
-                <p>&copy; 2026 Mario Gabriel Spineti de Carvalho. Todos os direitos reservados.</p>
-                <div class="mt-4 md:mt-0 flex gap-4">
-                    <a href="#" class="hover:text-brand-white transition-colors">Termos de Uso</a>
-                    <a href="#" class="hover:text-brand-white transition-colors">Privacidade</a>
-                </div>
-            </div>
-        </div>
-    </footer>
 
-    <script type="module" src="app.js"></script>
-  <script>
+</ul>
+
+</div>
+
+</div>
+
+<div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-sm">
+
+<p>© 2026 Mario Gabriel Spineti de Carvalho. Todos os direitos reservados.</p>
+
+<div class="mt-4 md:mt-0 flex gap-4">
+<a href="#">Termos de Uso</a>
+<a href="#">Privacidade</a>
+</div>
+
+</div>
+
+</div>
+
+</footer>
+
+<script type="module" src="app.js"></script>
+
+<script>
 lucide.createIcons();
 </script>
-  
+
 </body>
 </html>
