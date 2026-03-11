@@ -117,6 +117,66 @@ container.innerHTML = testimonials.map(t => `
 
 
 
+// SISTEMA DE AVALIAÇÃO (MODAL + ESTRELAS)
+
+function initAvaliacoes() {
+
+const btnAvaliar = document.getElementById("btnAvaliar")
+const modal = document.getElementById("modalAvaliacao")
+const fecharModal = document.getElementById("fecharModal")
+
+if (!btnAvaliar || !modal || !fecharModal) return
+
+
+// abrir modal
+btnAvaliar.addEventListener("click", () => {
+
+modal.classList.remove("hidden")
+modal.classList.add("flex")
+
+})
+
+
+// fechar modal
+fecharModal.addEventListener("click", () => {
+
+modal.classList.add("hidden")
+modal.classList.remove("flex")
+
+})
+
+
+// estrelas
+const estrelas = modal.querySelectorAll('[data-lucide="star"]')
+
+let nota = 0
+
+estrelas.forEach((estrela, index) => {
+
+estrela.style.cursor = "pointer"
+
+estrela.addEventListener("click", () => {
+
+nota = (index + 1) * 2   // 0 a 10
+
+estrelas.forEach((e, i) => {
+
+if (i <= index) {
+e.classList.add("text-yellow-400")
+} else {
+e.classList.remove("text-yellow-400")
+}
+
+})
+
+})
+
+})
+
+}
+
+
+
 // INICIAR
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -124,6 +184,8 @@ renderEbooks()
 renderCursos()
 renderArtigos()
 renderTestimonials()
+
+initAvaliacoes()
 
 if (typeof lucide !== "undefined") {
 lucide.createIcons()
