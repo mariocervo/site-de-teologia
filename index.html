@@ -257,50 +257,6 @@ Deixe suas avaliações e comentários
 
 </section>
 
-<!-- MODAL AVALIAÇÃO -->
-
-<div id="modalAvaliacao" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
-
-<div class="bg-brand-dark p-8 rounded-xl w-full max-w-md border border-white/10">
-
-<div class="flex items-center gap-2 mb-6">
-
-<i data-lucide="star"></i>
-<h3 class="text-xl text-white font-bold">Deixe sua avaliação</h3>
-
-</div>
-
-<input type="text" placeholder="Seu nome"
-class="w-full mb-4 p-3 rounded bg-black border border-white/10 text-white">
-
-<textarea placeholder="Escreva seu comentário"
-class="w-full mb-4 p-3 rounded bg-black border border-white/10 text-white"
-rows="4"></textarea>
-
-<p class="text-sm text-gray-400 mb-2">Avalie o site:</p>
-
-<div class="flex gap-2 mb-6">
-
-<i data-lucide="star"></i>
-<i data-lucide="star"></i>
-<i data-lucide="star"></i>
-<i data-lucide="star"></i>
-<i data-lucide="star"></i>
-
-</div>
-
-<button
-class="w-full py-3 rounded bg-brand-gold text-black font-bold flex items-center justify-center gap-2 hover:bg-brand-goldlight transition">
-
-<i data-lucide="send"></i>
-Enviar
-
-</button>
-
-</div>
-
-</div>
-
 <!-- CTA -->
 
 <section class="py-24 bg-brand-black text-center">
@@ -339,15 +295,51 @@ Ebooks de alta qualidade selecionados para o seu desenvolvimento espiritual, aca
 
 </div>
 
+<div>
+
+<h3 class="text-white font-semibold mb-4">Contato</h3>
+
+<ul class="space-y-3">
+
+<li>
+<a href="https://wa.me/5517991996793" target="_blank" class="flex gap-2">
+<i data-lucide="message-circle"></i> WhatsApp
+</a>
+</li>
+
+<li>
+<a href="https://instagram.com/prof.mariogabriel" target="_blank" class="flex gap-2">
+<i data-lucide="instagram"></i> Instagram
+</a>
+</li>
+
+<li>
+<a href="https://facebook.com/MarioGSCarvalho" target="_blank" class="flex gap-2">
+<i data-lucide="facebook"></i> Facebook
+</a>
+</li>
+
+<li>
+<a href="https://mariocervo.github.io/Ebooksvariados/" target="_blank" class="flex gap-2">
+<i data-lucide="globe"></i> E-books variados
+</a>
+</li>
+
+</ul>
+
 </div>
 
-<div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-sm">
+</div>
 
-<p>© 2026 Mario Gabriel Spineti de Carvalho. Todos os direitos reservados.</p>
+<div class="border-t border-white/10 pt-8 text-sm flex flex-col md:flex-row justify-between items-center">
 
-<div class="mt-4 md:mt-0 flex gap-4">
-<a href="#">Termos de Uso</a>
+<div>
+© 2026 Mario Gabriel Spineti de Carvalho. Todos os direitos reservados.
+</div>
+
+<div class="flex gap-6 mt-4 md:mt-0">
 <a href="#">Privacidade</a>
+<a href="#">Termos de Uso</a>
 </div>
 
 </div>
@@ -359,23 +351,7 @@ Ebooks de alta qualidade selecionados para o seu desenvolvimento espiritual, aca
 <script type="module" src="app.js"></script>
 
 <script>
-
 lucide.createIcons();
-
-const btnAvaliar = document.getElementById("btnAvaliar");
-const modal = document.getElementById("modalAvaliacao");
-
-btnAvaliar.onclick = () => {
-modal.classList.remove("hidden");
-modal.classList.add("flex");
-};
-
-modal.onclick = (e)=>{
-if(e.target === modal){
-modal.classList.add("hidden");
-}
-};
-
 </script>
 
 </body>
