@@ -12,11 +12,11 @@ const fecharModal = document.getElementById('fecharModalDetalhes')
 const detalheTitulo = document.getElementById('detalheTitulo')
 const detalheDescricao = document.getElementById('detalheDescricao')
 
-// Função para abrir modal com dados do ebook
-function abrirDetalhes(titulo, descricao) {
+// Função para abrir modal com dados do ebook (agora usando longDescription)
+function abrirDetalhes(titulo, descricaoLonga) {
     if (modalDetalhes) {
         detalheTitulo.textContent = titulo
-        detalheDescricao.textContent = descricao || 'Descrição detalhada em breve.'
+        detalheDescricao.textContent = descricaoLonga || 'Descrição detalhada em breve.'
         modalDetalhes.style.display = 'flex'
     }
 }
@@ -47,7 +47,7 @@ function renderEbooks() {
                 <p class="text-brand-gray text-sm mb-4">${book.description}</p>
                 <p class="text-brand-gold font-bold mb-4">${book.price}</p>
                 <button class="btn-detalhes-ebook w-full mb-2 flex items-center justify-center gap-2 bg-black text-white py-2 rounded font-semibold hover:bg-gray-800 transition" 
-                    data-titulo="${book.title}" data-descricao="${book.description}">
+                    data-titulo="${book.title}" data-descricaolongaa="${book.longDescription.replace(/"/g, '&quot;')}">
                     <i data-lucide="info"></i> Ver detalhes
                 </button>
                 <a href="${book.hotmartLink}" target="_blank" class="block text-center bg-brand-gold text-black py-2 rounded font-bold hover:bg-brand-goldlight transition">
@@ -67,7 +67,7 @@ function renderEbooks() {
                 <p class="text-brand-gray text-sm mb-4">${book.description}</p>
                 <p class="text-brand-gold font-bold mb-4">${book.price}</p>
                 <button class="btn-detalhes-ebook w-full mb-2 flex items-center justify-center gap-2 bg-black text-white py-2 rounded font-semibold hover:bg-gray-800 transition" 
-                    data-titulo="${book.title}" data-descricao="${book.description}">
+                    data-titulo="${book.title}" data-descricaolongaa="${book.longDescription.replace(/"/g, '&quot;')}">
                     <i data-lucide="info"></i> Ver detalhes
                 </button>
                 <a href="${book.hotmartLink}" target="_blank" class="block text-center bg-brand-gold text-black py-2 rounded font-bold hover:bg-brand-goldlight transition">
@@ -82,8 +82,8 @@ function renderEbooks() {
         btn.addEventListener('click', (e) => {
             e.preventDefault()
             const titulo = btn.getAttribute('data-titulo')
-            const descricao = btn.getAttribute('data-descricao')
-            abrirDetalhes(titulo, descricao)
+            const descricaoLonga = btn.getAttribute('data-descricaolongaa')
+            abrirDetalhes(titulo, descricaoLonga)
         })
     })
 }
