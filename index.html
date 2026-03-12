@@ -639,48 +639,11 @@ document.getElementById("loginBox").style.display="none"
 <!-- ========================= -->
 
 <section style="padding:80px;background:#111;">
-
-<h2 style="text-align:center;font-size:32px;margin-bottom:40px;">
-Estudos Bíblicos
-</h2>
-
 <div id="blogPosts" style="max-width:800px;margin:auto;"></div>
-
 </section>
 
 <script>
-
-let posts=[
-
-{
-titulo:"O que é Exegese Bíblica",
-texto:"Exegese é o estudo profundo do texto bíblico..."
-},
-
-{
-titulo:"O que é Hermenêutica",
-texto:"Hermenêutica é a arte de interpretar textos..."
-}
-
-]
-
-let blog=document.getElementById("blogPosts")
-
-posts.forEach(p=>{
-
-let div=document.createElement("div")
-
-div.style.marginBottom="30px"
-
-div.innerHTML=`
-<h3>${p.titulo}</h3>
-<p>${p.texto}</p>
-`
-
-blog.appendChild(div)
-
-})
-
+let posts=[]
 </script>
 
 <!-- ========================= -->
@@ -689,7 +652,7 @@ blog.appendChild(div)
 
 <div style="text-align:center;padding:80px;">
 
-<h2>Aula gratuita</h2>
+<h2>AULA GRATUITA EM BREVE</h2>
 
 <button onclick="abrirVideo()">▶ Assistir Aula</button>
 
@@ -701,7 +664,7 @@ style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;backgroun
 <div>
 
 <iframe width="560" height="315"
-src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+src=""
 allowfullscreen></iframe>
 
 <br><button onclick="fecharVideo()">Fechar</button>
@@ -758,9 +721,116 @@ s.parentNode.insertBefore(t,s)
 'https://connect.facebook.net/en_US/fbevents.js')
 
 fbq('init','PIXEL_ID')
-
 fbq('track','PageView')
-</script> 
+</script>
+
+<!-- ========================= -->
+<!-- MODAL DETALHES DO EBOOK (adicionado) -->
+<!-- ========================= -->
+
+<div id="modalDetalhesEbook" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:10000; justify-content:center; align-items:center;">
+  <div style="background:#111; padding:20px; border-radius:10px; width:400px; max-width:90%; position:relative; color:white;">
+    <button id="fecharModalDetalhes" style="position:absolute; top:10px; left:10px; background:transparent; border:none; color:white; font-size:20px; cursor:pointer; display:flex; align-items:center; gap:5px;">
+      ← Voltar
+    </button>
+    <h3 style="color:white; margin-top:30px; margin-bottom:15px; font-size:1.5rem;">Detalhes do Ebook</h3>
+    <p style="color:#ccc; margin-bottom:10px;"><strong>Título:</strong> <span id="detalheTitulo"></span></p>
+    <p style="color:#ccc; margin-bottom:20px;"><strong>Descrição:</strong> <span id="detalheDescricao"></span></p>
+    <!-- Áreas vazias para você preencher posteriormente -->
+    <p style="color:#888; font-style:italic;">(Conteúdo da descrição será inserido aqui futuramente)</p>
+  </div>
+</div>
+
+<!-- Script para adicionar botões "Ver detalhes" e controlar o modal -->
+<script>
+  (function() {
+    // Função para adicionar botões aos cards de ebook
+    function adicionarBotoesDetalhes() {
+      // Seleciona todos os cards dentro das grids de destaque e catálogo
+      const grids = ['#destaques-grid', '#catalogo-grid'];
+      let cards = [];
+      grids.forEach(selector => {
+        const grid = document.querySelector(selector);
+        if (grid) {
+          const children = Array.from(grid.children);
+          cards = cards.concat(children);
+        }
+      });
+
+      if (cards.length === 0) {
+        // Se ainda não encontrou cards, tenta novamente mais tarde
+        setTimeout(adicionarBotoesDetalhes, 500);
+        return;
+      }
+
+      // Para cada card, insere o botão "Ver detalhes" antes do botão de comprar
+      cards.forEach(card => {
+        // Verifica se já não foi adicionado
+        if (card.querySelector('.btn-detalhes-ebook')) return;
+
+        // Procura pelo botão de comprar (assumindo que seja um link ou botão com texto "Comprar" ou similar)
+        const botoes = card.querySelectorAll('a, button');
+        let botaoComprar = null;
+        for (let btn of botoes) {
+          if (btn.textContent.toLowerCase().includes('comprar') || btn.textContent.toLowerCase().includes('ver ebook') || btn.textContent.toLowerCase().includes('saiba mais')) {
+            botaoComprar = btn;
+            break;
+          }
+        }
+
+        // Cria o botão "Ver detalhes"
+        const btnDetalhes = document.createElement('button');
+        btnDetalhes.className = 'btn-detalhes-ebook flex items-center gap-2 px-4 py-2 rounded bg-black text-white font-semibold hover:bg-gray-800 transition-all mb-2';
+        btnDetalhes.innerHTML = '<i data-lucide="info"></i> Ver detalhes';
+        btnDetalhes.setAttribute('data-lucide', 'info');
+        
+        // Adiciona evento para abrir o modal
+        btnDetalhes.addEventListener('click', function(e) {
+          e.preventDefault();
+          // Pega o título do ebook (geralmente um h3, h4 ou elemento com classe)
+          const tituloElem = card.querySelector('h3, h4, .font-bold, .text-white');
+          const titulo = tituloElem ? tituloElem.textContent : 'Título do ebook';
+          // Atualiza o modal com o título (descrição fica vazia para você preencher)
+          document.getElementById('detalheTitulo').textContent = titulo;
+          document.getElementById('detalheDescricao').textContent = ''; // vazio para você preencher
+          // Exibe o modal
+          document.getElementById('modalDetalhesEbook').style.display = 'flex';
+        });
+
+        // Insere o botão antes do botão de comprar, se encontrado; senão, no início do card
+        if (botaoComprar && botaoComprar.parentNode) {
+          botaoComprar.parentNode.insertBefore(btnDetalhes, botaoComprar);
+        } else {
+          // Se não encontrou botão de comprar, coloca no topo do card
+          card.insertBefore(btnDetalhes, card.firstChild);
+        }
+      });
+
+      // Atualiza os ícones do Lucide para o novo botão
+      if (typeof lucide !== 'undefined' && lucide.createIcons) {
+        lucide.createIcons();
+      }
+    }
+
+    // Fecha o modal ao clicar no botão Voltar
+    document.getElementById('fecharModalDetalhes').addEventListener('click', function() {
+      document.getElementById('modalDetalhesEbook').style.display = 'none';
+    });
+
+    // Fecha o modal ao clicar fora do conteúdo
+    document.getElementById('modalDetalhesEbook').addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.style.display = 'none';
+      }
+    });
+
+    // Aguarda o carregamento da página e tenta adicionar os botões
+    window.addEventListener('load', function() {
+      // Pequeno atraso para garantir que o app.js tenha populado as grids
+      setTimeout(adicionarBotoesDetalhes, 1000);
+    });
+  })();
+</script>
   
 </body>
 </html>
