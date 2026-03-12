@@ -4,9 +4,27 @@
 <head>
 
 <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Professor Mario Gabriel | Teologia e Bíblia</title>
+
+<meta name="description" content="Cursos e ebooks de teologia com o professor Mario Gabriel. Aprenda Bíblia, exegese e hermenêutica de forma clara e profunda.">
+
+<meta name="keywords" content="teologia, bíblia, estudo bíblico, hermenêutica, exegese, cursos de teologia, ebooks cristãos">
+
+<meta name="author" content="Mario Gabriel Spineti de Carvalho">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://mariocervo.github.io/site-de-teologia/">
+
+<meta name="theme-color" content="#0A0A0A">
+
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/favicon.png">
+
+<link rel="preload" as="image" href="img/autor/mario.webp">
 
 <!-- Open Graph (Compartilhamento) -->
 
@@ -54,6 +72,26 @@ light:'#F5F5F5'
 <link rel="stylesheet" href="style.css">
 
 <script src="https://unpkg.com/lucide@latest"></script>
+
+<!-- Scroll Reveal -->
+
+<script src="https://unpkg.com/scrollreveal"></script>
+
+<!-- Schema.org SEO -->
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Person",
+ "name": "Mario Gabriel Spineti de Carvalho",
+ "jobTitle": "Professor de Teologia",
+ "url": "https://mariocervo.github.io/site-de-teologia/",
+ "sameAs": [
+   "https://instagram.com/prof.mariogabriel",
+   "https://facebook.com/MarioGSCarvalho"
+ ]
+}
+</script>
 
 </head>
 
@@ -179,7 +217,7 @@ Ver Cursos
 
 <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
 
-<img src="img/autor/mario.webp" class="rounded-2xl border border-white/10">
+<img src="img/autor/mario.webp" loading="lazy" alt="Professor Mario Gabriel ensinando teologia" class="rounded-2xl border border-white/10">
 
 <div>
 
@@ -257,49 +295,15 @@ Deixe suas avaliações e comentários
 
 </section>
 
-<!-- MODAL AVALIAÇÃO -->
+<!-- BOTÃO WHATSAPP -->
 
-<div id="modalAvaliacao" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
+<a href="https://wa.me/5517991996793"
+target="_blank"
+class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:scale-110 transition z-50">
 
-<div class="bg-brand-dark p-8 rounded-2xl w-full max-w-md border border-white/10">
+<i data-lucide="message-circle"></i>
 
-<div class="flex justify-between items-center mb-6">
-
-<h3 class="text-xl text-white font-bold flex items-center gap-2">
-<i data-lucide="star"></i>
-Deixe sua avaliação
-</h3>
-
-<button id="fecharModal">
-<i data-lucide="x"></i>
-</button>
-
-</div>
-
-<input type="text" placeholder="Seu nome"
-class="w-full p-3 mb-4 rounded bg-black border border-white/10 text-white">
-
-<textarea placeholder="Escreva seu comentário"
-class="w-full p-3 mb-4 rounded bg-black border border-white/10 text-white h-28"></textarea>
-
-<p class="text-sm text-gray-400 mb-2">Avalie o site</p>
-
-<div class="flex gap-2 text-brand-gold text-xl mb-6">
-<i data-lucide="star"></i>
-<i data-lucide="star"></i>
-<i data-lucide="star"></i>
-<i data-lucide="star"></i>
-<i data-lucide="star"></i>
-</div>
-
-<button class="w-full bg-brand-gold text-black font-bold py-3 rounded flex items-center justify-center gap-2 hover:bg-brand-goldlight">
-<i data-lucide="send"></i>
-Enviar Avaliação
-</button>
-
-</div>
-
-</div>
+</a>
 
 <!-- CTA -->
 
@@ -396,6 +400,13 @@ Ebooks de alta qualidade selecionados para o seu desenvolvimento espiritual, aca
 
 <script>
 lucide.createIcons();
+
+ScrollReveal().reveal('section',{
+distance:'40px',
+duration:800,
+origin:'bottom',
+interval:100
+});
 </script>
 
 </body>
