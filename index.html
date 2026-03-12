@@ -437,43 +437,82 @@ sec.style.display="none"
 </script>
 
 <!-- ========================= -->
-<!-- NEWSLETTER -->
+<!-- NEWSLETTER E SUGESTÕES (DUAS COLUNAS) -->
 <!-- ========================= -->
 
-<section style="padding:80px 20px;text-align:center;background:#111;">
-
-<h2 style="font-size:32px;margin-bottom:20px;">
-Receba estudos bíblicos no seu e-mail
-</h2>
-
-<input id="emailNewsletter" placeholder="Digite seu e-mail"
-style="padding:12px;border-radius:8px;border:none;margin-right:10px;">
-
-<button onclick="salvarEmail()"
-style="padding:12px 20px;border-radius:8px;background:#D4AF37;border:none;font-weight:bold;">
-Receber
-</button>
-
+<section style="padding:80px 20px;background:#111;">
+  <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px;">
+    
+    <!-- COLUNA 1: SUGESTÃO DE EBOOK -->
+    <div style="text-align:center;">
+      <h2 style="font-size:28px;margin-bottom:10px;color:white;">Qual tema de Teologia ou Bíblia você gostaria de ler?</h2>
+      <p style="color:#ccc;margin-bottom:20px;">💬 Escreva sua sugestão abaixo. Sua ideia pode se tornar meu próximo eBook.</p>
+      <textarea id="sugestaoEbook" placeholder="Digite sua sugestão (máximo 200 caracteres)" maxlength="200" style="padding:12px;border-radius:8px;border:none;margin-bottom:10px;width:100%;background:#222;color:white;" rows="3"></textarea>
+      <input type="email" id="emailSugestao" placeholder="Seu e-mail para contato" required style="padding:12px;border-radius:8px;border:none;margin-bottom:10px;width:100%;background:#222;color:white;">
+      <button onclick="enviarSugestao()" style="padding:12px 20px;border-radius:8px;background:#D4AF37;border:none;font-weight:bold;color:black;cursor:pointer;width:100%;">ENVIAR</button>
+    </div>
+    
+    <!-- COLUNA 2: ESTUDOS BÍBLICOS NO EMAIL -->
+    <div style="text-align:center;">
+      <h2 style="font-size:28px;margin-bottom:10px;color:white;">Receba estudos bíblicos no seu e-mail</h2>
+      <p style="color:#ccc;margin-bottom:20px;">Escolha os temas que você gostaria de aprender e receba conteúdos exclusivos.</p>
+      <textarea id="sugestaoEstudos" placeholder="Digite os temas de interesse (máximo 200 caracteres)" maxlength="200" style="padding:12px;border-radius:8px;border:none;margin-bottom:10px;width:100%;background:#222;color:white;" rows="3"></textarea>
+      <input type="email" id="emailEstudos" placeholder="Seu e-mail para receber os estudos" required style="padding:12px;border-radius:8px;border:none;margin-bottom:10px;width:100%;background:#222;color:white;">
+      <button onclick="enviarEstudos()" style="padding:12px 20px;border-radius:8px;background:#D4AF37;border:none;font-weight:bold;color:black;cursor:pointer;width:100%;">ENVIAR</button>
+    </div>
+  </div>
 </section>
 
 <script>
+function enviarSugestao() {
+    const sugestao = document.getElementById('sugestaoEbook').value.trim();
+    const email = document.getElementById('emailSugestao').value.trim();
 
-function salvarEmail(){
+    if (!sugestao) {
+        alert('Por favor, escreva sua sugestão.');
+        return;
+    }
+    if (!email) {
+        alert('Por favor, informe seu e-mail.');
+        return;
+    }
+    if (!email.includes('@') || !email.includes('.')) {
+        alert('Por favor, informe um e-mail válido.');
+        return;
+    }
 
-let email=document.getElementById("emailNewsletter").value
-
-if(!email)return alert("Digite um email")
-
-let lista=JSON.parse(localStorage.getItem("emails")||"[]")
-
-lista.push(email)
-
-localStorage.setItem("emails",JSON.stringify(lista))
-
-alert("Email cadastrado!")
-
+    const assunto = encodeURIComponent('Sugestão de eBook - Tema Teológico');
+    const corpo = encodeURIComponent(
+        `Tema sugerido: ${sugestao}\n\n` +
+        `E-mail para contato: ${email}`
+    );
+    window.location.href = `mailto:mariocervo@outlook.com?subject=${assunto}&body=${corpo}`;
 }
 
+function enviarEstudos() {
+    const temas = document.getElementById('sugestaoEstudos').value.trim();
+    const email = document.getElementById('emailEstudos').value.trim();
+
+    if (!temas) {
+        alert('Por favor, escreva os temas de interesse.');
+        return;
+    }
+    if (!email) {
+        alert('Por favor, informe seu e-mail.');
+        return;
+    }
+    if (!email.includes('@') || !email.includes('.')) {
+        alert('Por favor, informe um e-mail válido.');
+        return;
+    }
+
+    const assunto = encodeURIComponent('Interesse em Estudos Bíblicos');
+    const corpo = encodeURIComponent(
+        `Temas de interesse: ${temas}\n\n` +
+        `E-mail para contato: ${email}`
+    );
+    window.location.href = `mailto:mariocervo@outlook.com?subject=${assunto}&body=${corpo}`;
+}
 </script>
 
 <!-- ========================= -->
