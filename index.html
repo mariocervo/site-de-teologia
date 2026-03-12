@@ -409,5 +409,358 @@ interval:100
 });
 </script>
 
+ <!-- ========================= -->
+<!-- BUSCA NO SITE -->
+<!-- ========================= -->
+
+<div style="position:fixed;top:90px;right:20px;z-index:9999;">
+<input id="buscaSite" placeholder="Buscar no site..."
+style="padding:10px;border-radius:8px;border:none;">
+</div>
+
+<script>
+document.getElementById("buscaSite").addEventListener("keyup",function(){
+
+let termo=this.value.toLowerCase()
+
+document.querySelectorAll("section").forEach(sec=>{
+
+if(sec.innerText.toLowerCase().includes(termo)){
+sec.style.display="block"
+}else{
+sec.style.display="none"
+}
+
+})
+
+})
+</script>
+
+<!-- ========================= -->
+<!-- NEWSLETTER -->
+<!-- ========================= -->
+
+<section style="padding:80px 20px;text-align:center;background:#111;">
+
+<h2 style="font-size:32px;margin-bottom:20px;">
+Receba estudos bíblicos no seu e-mail
+</h2>
+
+<input id="emailNewsletter" placeholder="Digite seu e-mail"
+style="padding:12px;border-radius:8px;border:none;margin-right:10px;">
+
+<button onclick="salvarEmail()"
+style="padding:12px 20px;border-radius:8px;background:#D4AF37;border:none;font-weight:bold;">
+Receber
+</button>
+
+</section>
+
+<script>
+
+function salvarEmail(){
+
+let email=document.getElementById("emailNewsletter").value
+
+if(!email)return alert("Digite um email")
+
+let lista=JSON.parse(localStorage.getItem("emails")||"[]")
+
+lista.push(email)
+
+localStorage.setItem("emails",JSON.stringify(lista))
+
+alert("Email cadastrado!")
+
+}
+
+</script>
+
+<!-- ========================= -->
+<!-- DARK / LIGHT MODE -->
+<!-- ========================= -->
+
+<button id="modoBtn"
+style="position:fixed;bottom:100px;right:20px;padding:12px;border-radius:50%;z-index:9999;">
+🌙
+</button>
+
+<script>
+
+let modo=localStorage.getItem("modo")
+
+if(modo==="light"){
+document.body.style.background="#ffffff"
+document.body.style.color="#000000"
+}
+
+document.getElementById("modoBtn").onclick=function(){
+
+if(document.body.style.background==="white"){
+
+document.body.style.background="#0A0A0A"
+document.body.style.color="#fff"
+localStorage.setItem("modo","dark")
+
+}else{
+
+document.body.style.background="white"
+document.body.style.color="#000"
+localStorage.setItem("modo","light")
+
+}
+
+}
+
+</script>
+
+<!-- ========================= -->
+<!-- SISTEMA DE AVALIAÇÕES -->
+<!-- ========================= -->
+
+<div id="modalAvaliar"
+style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#000a;z-index:9999;justify-content:center;align-items:center;">
+
+<div style="background:#111;padding:30px;border-radius:10px;width:300px;">
+
+<h3>Deixe sua avaliação</h3>
+
+<input id="nomeAvaliador" placeholder="Seu nome"
+style="width:100%;margin:10px 0;padding:8px;">
+
+<textarea id="comentarioAvaliacao" placeholder="Comentário"
+style="width:100%;margin:10px 0;padding:8px;"></textarea>
+
+<button onclick="enviarAvaliacao()">Enviar</button>
+
+<button onclick="fecharAval()">Fechar</button>
+
+</div>
+
+</div>
+
+<script>
+
+document.getElementById("btnAvaliar").onclick=function(){
+
+document.getElementById("modalAvaliar").style.display="flex"
+
+}
+
+function fecharAval(){
+
+document.getElementById("modalAvaliar").style.display="none"
+
+}
+
+function enviarAvaliacao(){
+
+let nome=document.getElementById("nomeAvaliador").value
+let texto=document.getElementById("comentarioAvaliacao").value
+
+if(!nome||!texto)return alert("Preencha tudo")
+
+let avaliacoes=JSON.parse(localStorage.getItem("avaliacoes")||"[]")
+
+avaliacoes.push({nome,texto})
+
+localStorage.setItem("avaliacoes",JSON.stringify(avaliacoes))
+
+location.reload()
+
+}
+
+window.onload=function(){
+
+let avaliacoes=JSON.parse(localStorage.getItem("avaliacoes")||"[]")
+
+let grid=document.getElementById("depoimentos-grid")
+
+avaliacoes.forEach(a=>{
+
+let div=document.createElement("div")
+
+div.innerHTML=`
+<div style="background:#111;padding:20px;border-radius:10px;">
+<strong>${a.nome}</strong>
+<p>${a.texto}</p>
+</div>
+`
+
+grid.appendChild(div)
+
+})
+
+document.getElementById("contadorAvaliacoes").innerText=
+avaliacoes.length+" avaliações"
+
+}
+
+</script>
+
+<!-- ========================= -->
+<!-- LOGIN SIMPLES -->
+<!-- ========================= -->
+
+<div id="loginBox"
+style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+background:#111;padding:30px;border-radius:10px;display:none;z-index:9999;">
+
+<h3>Área do aluno</h3>
+
+<input id="loginEmail" placeholder="Email"
+style="display:block;margin:10px 0;padding:8px;">
+
+<input id="loginSenha" type="password" placeholder="Senha"
+style="display:block;margin:10px 0;padding:8px;">
+
+<button onclick="logar()">Entrar</button>
+
+</div>
+
+<script>
+
+function logar(){
+
+let email=document.getElementById("loginEmail").value
+
+localStorage.setItem("usuario",email)
+
+alert("Login realizado")
+
+document.getElementById("loginBox").style.display="none"
+
+}
+
+</script>
+
+<!-- ========================= -->
+<!-- BLOG AUTOMÁTICO -->
+<!-- ========================= -->
+
+<section style="padding:80px;background:#111;">
+
+<h2 style="text-align:center;font-size:32px;margin-bottom:40px;">
+Estudos Bíblicos
+</h2>
+
+<div id="blogPosts" style="max-width:800px;margin:auto;"></div>
+
+</section>
+
+<script>
+
+let posts=[
+
+{
+titulo:"O que é Exegese Bíblica",
+texto:"Exegese é o estudo profundo do texto bíblico..."
+},
+
+{
+titulo:"O que é Hermenêutica",
+texto:"Hermenêutica é a arte de interpretar textos..."
+}
+
+]
+
+let blog=document.getElementById("blogPosts")
+
+posts.forEach(p=>{
+
+let div=document.createElement("div")
+
+div.style.marginBottom="30px"
+
+div.innerHTML=`
+<h3>${p.titulo}</h3>
+<p>${p.texto}</p>
+`
+
+blog.appendChild(div)
+
+})
+
+</script>
+
+<!-- ========================= -->
+<!-- VIDEO DE CURSO -->
+<!-- ========================= -->
+
+<div style="text-align:center;padding:80px;">
+
+<h2>Aula gratuita</h2>
+
+<button onclick="abrirVideo()">▶ Assistir Aula</button>
+
+</div>
+
+<div id="videoModal"
+style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#000c;z-index:9999;justify-content:center;align-items:center;">
+
+<div>
+
+<iframe width="560" height="315"
+src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+allowfullscreen></iframe>
+
+<br><button onclick="fecharVideo()">Fechar</button>
+
+</div>
+
+</div>
+
+<script>
+
+function abrirVideo(){
+document.getElementById("videoModal").style.display="flex"
+}
+
+function fecharVideo(){
+document.getElementById("videoModal").style.display="none"
+}
+
+</script>
+
+<!-- ========================= -->
+<!-- GOOGLE ANALYTICS -->
+<!-- ========================= -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXX"></script>
+
+<script>
+window.dataLayer=window.dataLayer||[]
+function gtag(){dataLayer.push(arguments)}
+gtag('js',new Date())
+gtag('config','G-XXXX')
+</script>
+
+<!-- ========================= -->
+<!-- META PIXEL -->
+<!-- ========================= -->
+
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)}
+if(!f._fbq)f._fbq=n
+n.push=n
+n.loaded=!0
+n.version='2.0'
+n.queue=[]
+t=b.createElement(e)
+t.async=!0
+t.src=v
+s=b.getElementsByTagName(e)[0]
+s.parentNode.insertBefore(t,s)
+
+}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js')
+
+fbq('init','PIXEL_ID')
+
+fbq('track','PageView')
+</script> 
+  
 </body>
 </html>
