@@ -19,6 +19,9 @@ const compartilharImagem = document.getElementById('compartilharImagem')
 const compartilharTitulo = document.getElementById('compartilharTitulo')
 const compartilharMensagemPreview = document.getElementById('compartilharMensagemPreview')
 
+// URL base do site (para compartilhamento)
+const SITE_URL = 'https://mariocervo.github.io/site-de-teologia/'
+
 // Função para abrir modal com dados do ebook (detalhes)
 function abrirDetalhes(titulo, descricaoLonga) {
     if (modalDetalhes) {
@@ -29,14 +32,15 @@ function abrirDetalhes(titulo, descricaoLonga) {
 }
 
 // Função para abrir modal de compartilhamento
-function abrirCompartilhar(titulo, descricao, imagem, link) {
+function abrirCompartilhar(titulo, descricao, imagem) {
     if (!modalCompartilhar) return
 
     // Preencher dados
     compartilharImagem.src = imagem
     compartilharTitulo.textContent = titulo
 
-    // Montar mensagem de prévia
+    // Montar mensagem de prévia com o link do site + âncora do catálogo
+    const link = SITE_URL + '#catalogo'
     const mensagem = `Olá! Estou compartilhando este eBook escrito pelo Professor Mario G. S. de Carvalho. ${titulo} - ${descricao} Acesse pelo link: ${link}`
     compartilharMensagemPreview.textContent = mensagem
 
@@ -136,7 +140,7 @@ function renderEbooks() {
                     Comprar
                 </a>
                 <button class="btn-compartilhar-ebook w-full mt-2 flex items-center justify-center gap-2 bg-black text-white py-2 rounded font-semibold hover:bg-gray-800 transition"
-                    data-titulo="${book.title}" data-descricao="${book.description}" data-imagem="${book.image}" data-link="${book.hotmartLink}">
+                    data-titulo="${book.title}" data-descricao="${book.description}" data-imagem="${book.image}">
                     <i data-lucide="share-2"></i> Compartilhar
                 </button>
             </div>
@@ -160,7 +164,7 @@ function renderEbooks() {
                     Comprar
                 </a>
                 <button class="btn-compartilhar-ebook w-full mt-2 flex items-center justify-center gap-2 bg-black text-white py-2 rounded font-semibold hover:bg-gray-800 transition"
-                    data-titulo="${book.title}" data-descricao="${book.description}" data-imagem="${book.image}" data-link="${book.hotmartLink}">
+                    data-titulo="${book.title}" data-descricao="${book.description}" data-imagem="${book.image}">
                     <i data-lucide="share-2"></i> Compartilhar
                 </button>
             </div>
@@ -184,8 +188,7 @@ function renderEbooks() {
             const titulo = btn.getAttribute('data-titulo')
             const descricao = btn.getAttribute('data-descricao')
             const imagem = btn.getAttribute('data-imagem')
-            const link = btn.getAttribute('data-link')
-            abrirCompartilhar(titulo, descricao, imagem, link)
+            abrirCompartilhar(titulo, descricao, imagem)
         })
     })
 }
