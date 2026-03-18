@@ -1,264 +1,819 @@
-import { ebooks, courses, articles } from './data.js'
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
 
-// Elementos do DOM
-const catalogoGrid = document.getElementById('catalogo-grid')
-const destaquesGrid = document.getElementById('destaques-grid')
-const cursosSection = document.getElementById('cursos')
-const artigosSection = document.getElementById('artigos')
+<head>
 
-// Modal de detalhes
-const modalDetalhes = document.getElementById('modalDetalhesEbook')
-const fecharModal = document.getElementById('fecharModalDetalhes')
-const detalheTitulo = document.getElementById('detalheTitulo')
-const detalheDescricao = document.getElementById('detalheDescricao')
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-// Modal de compartilhamento
-const modalCompartilhar = document.getElementById('modalCompartilharEbook')
-const fecharModalCompartilhar = document.getElementById('fecharModalCompartilhar')
-const compartilharMensagemPreview = document.getElementById('compartilharMensagemPreview')
+<title>Professor Mario G. S. Carvalho | Teologia e Bíblia</title>
 
-// URL base do site (para compartilhamento)
-const SITE_URL = 'https://mariocervo.github.io/site-de-teologia/'
+<meta name="description" content="Cursos e ebooks de teologia com o professor Mario G. S. Carvalho. Aprenda Bíblia, exegese e hermenêutica de forma clara e profunda.">
 
-// Variáveis para armazenar dados do ebook a ser compartilhado
-let ebookAtual = {
-    titulo: '',
-    descricao: ''
+<meta name="keywords" content="teologia, bíblia, estudo bíblico, hermenêutica, exegese, cursos de teologia, ebooks cristãos">
+
+<meta name="author" content="Mario G. S. Carvalho">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://mariocervo.github.io/site-de-teologia/">
+
+<meta name="theme-color" content="#0A0A0A">
+
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/favicon.png">
+
+<link rel="preload" as="image" href="img/autor/mario.webp">
+
+<!-- Open Graph (Compartilhamento) -->
+
+<meta property="og:title" content="Professor Mario G. S. Carvalho | Teologia e Bíblia">
+<meta property="og:description" content="Aprenda teologia e Bíblia de forma clara e profunda com o Prof. Mario G. S. Carvalho. Ebooks e cursos especializados.">
+<meta property="og:image" content="https://mariocervo.github.io/site-de-teologia/img/autor/mario.webp">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mariocervo.github.io/site-de-teologia/">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Professor Mario G. S. Carvalho | Teologia e Bíblia">
+<meta name="twitter:description" content="Aprenda teologia e Bíblia de forma clara e profunda com o Prof. Mario G. S. Carvalho. Ebooks e cursos especializados.">
+<meta name="twitter:image" content="https://mariocervo.github.io/site-de-teologia/img/autor/mario.webp">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script>
+tailwind.config = {
+theme:{
+extend:{
+fontFamily:{
+sans:['Inter','sans-serif']
+},
+colors:{
+brand:{
+black:'#0A0A0A',
+dark:'#141414',
+gold:'#D4AF37',
+goldlight:'#F3D568',
+white:'#FFFFFF',
+gray:'#888888',
+light:'#F5F5F5'
+}
+}
+}
+}
+}
+</script>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<!-- Scroll Reveal -->
+
+<script src="https://unpkg.com/scrollreveal"></script>
+
+<!-- Schema.org SEO -->
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Person",
+ "name": "Mario G. S. Carvalho",
+ "jobTitle": "Professor de Teologia",
+ "url": "https://mariocervo.github.io/site-de-teologia/",
+ "sameAs": [
+   "https://instagram.com/prof.mariogabriel",
+   "https://facebook.com/MarioGSCarvalho"
+ ]
+}
+</script>
+
+</head>
+
+<body class="bg-brand-black text-brand-light font-sans">
+
+<!-- NAVBAR -->
+
+<nav class="fixed w-full top-0 bg-brand-black/80 backdrop-blur border-b border-white/10 z-50">
+
+<div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+
+<a href="#" class="text-xl font-bold text-white flex items-center gap-2">
+<span class="w-8 h-8 bg-brand-gold text-black rounded flex items-center justify-center font-bold">M</span>
+Mario G. S.
+</a>
+
+<div class="hidden md:flex gap-8 text-sm text-gray-400">
+
+<a href="#destaques" class="hover:text-brand-gold">Destaques</a>
+<a href="#catalogo" class="hover:text-brand-gold">Catálogo</a>
+<a href="#cursos" class="hover:text-brand-gold">Cursos</a>
+<a href="#artigos" class="hover:text-brand-gold">Artigos</a>
+<a href="#sobre" class="hover:text-brand-gold">Sobre</a>
+<a href="#depoimentos" class="hover:text-brand-gold">Depoimentos</a>
+
+</div>
+
+<a href="#catalogo"
+class="hidden md:block px-5 py-2 rounded-full bg-brand-gold text-black font-semibold hover:bg-brand-goldlight hover:scale-105 transition-all shadow-[0_0_15px_rgba(212,175,55,0.3)]">
+Ver Ebooks
+</a>
+
+</div>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="min-h-screen flex items-center justify-center pt-20">
+
+<div class="text-center max-w-4xl px-6">
+
+<h1 class="text-5xl md:text-7xl font-bold text-white mb-6">
+Aprenda Teologia e Bíblia de forma
+<span class="text-brand-gold">clara e profunda</span>
+</h1>
+
+<p class="text-lg text-gray-400 mb-10">
+Descubra as riquezas das Escrituras através de materiais desenvolvidos para fortalecer sua fé.
+</p>
+
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+
+<a href="#catalogo"
+class="px-8 py-4 rounded-full bg-brand-gold text-black font-bold flex items-center gap-2 hover:bg-brand-goldlight hover:scale-105 transition-all shadow-[0_0_20px_rgba(212,175,55,0.4)]">
+
+<i data-lucide="book-open"></i>
+Ver Ebooks
+
+</a>
+
+<a href="#cursos"
+class="px-8 py-4 rounded-full bg-brand-dark border border-white/10 text-white flex items-center gap-2 hover:scale-105 transition-all">
+
+<i data-lucide="graduation-cap"></i>
+Ver Cursos
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- DESTAQUES -->
+
+<section id="destaques" class="py-24 border-t border-white/5">
+
+<div class="max-w-7xl mx-auto px-6">
+
+<h2 class="text-4xl text-white mb-12">Ebooks em Destaque</h2>
+
+<div id="destaques-grid" class="grid md:grid-cols-3 gap-8"></div>
+
+</div>
+
+</section>
+
+<!-- CATALOGO -->
+
+<section id="catalogo" class="py-24 bg-brand-dark">
+
+<div class="max-w-7xl mx-auto px-6 text-center">
+
+<h2 class="text-4xl text-white mb-10">Biblioteca Digital</h2>
+
+<div id="catalogo-grid" class="grid md:grid-cols-4 gap-6"></div>
+
+</div>
+
+</section>
+
+<!-- CURSOS -->
+
+<section id="cursos" class="py-24">
+<div class="text-center">
+<h2 class="text-4xl text-white">Cursos de Teologia</h2>
+</div>
+</section>
+
+<!-- ARTIGOS -->
+
+<section id="artigos" class="py-24 bg-brand-dark">
+<div class="text-center">
+<h2 class="text-4xl text-white">Artigos Bíblicos</h2>
+</div>
+</section>
+
+<!-- SOBRE -->
+
+<section id="sobre" class="py-24">
+
+<div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+
+<img src="img/autor/mario.webp" loading="lazy" alt="Professor Mario G. S. Carvalho ensinando teologia" class="rounded-2xl border border-white/10">
+
+<div>
+
+<h2 class="text-4xl text-white mb-6">Mario G. S. Carvalho</h2>
+
+<p class="text-gray-400 mb-6">
+Aos 28 anos, Bacharel em Teologia pelo SEMINAD (Seminário Internacional da Assembleia de Deus), dedico minha vida a ensinar a Bíblia e a teologia de forma acessível.
+</p>
+
+<p class="text-gray-400 mb-10">
+Meu objetivo é ajudar pessoas a compreenderem a Palavra de Deus em sua essência.
+</p>
+
+<div class="space-y-4 mb-10">
+
+<div class="flex items-start space-x-4">
+<div class="text-gold mt-1"><i data-lucide="check-circle-2"></i></div>
+<div>
+<h4 class="text-white font-bold">Linguagem Acessível</h4>
+<p class="text-sm text-gray-500">Teologia sem complicações para quem quer aprender de verdade.</p>
+</div>
+</div>
+
+<div class="flex items-start space-x-4">
+<div class="text-gold mt-1"><i data-lucide="check-circle-2"></i></div>
+<div>
+<h4 class="text-white font-bold">Base Bíblica Sólida</h4>
+<p class="text-sm text-gray-500">Estudos fundamentados em exegese e hermenêutica séria.</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- DEPOIMENTOS -->
+
+<section id="depoimentos" class="py-24 bg-brand-dark relative">
+
+<div class="max-w-7xl mx-auto px-6">
+
+<div class="text-center mb-16">
+
+<h2 class="text-3xl md:text-4xl font-bold text-brand-white mb-4">
+O que dizem os leitores
+</h2>
+
+<p class="text-brand-gray">
+Inúmeras pessoas já transformaram suas vidas com nossos materiais.
+</p>
+
+</div>
+
+<div style="text-align:center;margin-top:40px;">
+
+<button id="btnAvaliar"
+class="px-8 py-4 rounded-full bg-brand-gold text-black font-bold flex items-center gap-2 mx-auto hover:bg-brand-goldlight hover:scale-105 transition-all shadow-[0_0_20px_rgba(212,175,55,0.4)]">
+
+<i data-lucide="message-square"></i>
+Deixe suas avaliações e comentários
+
+</button>
+
+<div id="contadorAvaliacoes" style="margin-top:10px;"></div>
+
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16" id="depoimentos-grid"></div>
+
+</div>
+
+</section>
+
+<!-- BOTÃO WHATSAPP -->
+
+<a href="https://wa.me/5517991996793"
+target="_blank"
+class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:scale-110 transition z-50">
+
+<i data-lucide="message-circle"></i>
+
+</a>
+
+<!-- CTA -->
+
+<section class="py-24 bg-brand-black text-center">
+
+<h2 class="text-4xl text-white mb-6">
+Pronto para aprofundar seu conhecimento?
+</h2>
+
+<a href="#catalogo"
+class="px-10 py-5 rounded-full bg-brand-gold text-black font-bold text-xl hover:bg-brand-goldlight hover:scale-105 transition-all shadow-[0_0_30px_rgba(212,175,55,0.3)]">
+
+Explorar Ebooks Agora
+
+</a>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer class="bg-[#050505] pt-16 pb-8 border-t border-white/10 text-brand-gray">
+
+<div class="max-w-7xl mx-auto px-6">
+
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+
+<div class="md:col-span-2">
+
+<a href="#" class="text-2xl font-bold text-white flex items-center gap-2 mb-4">
+<span class="w-8 h-8 rounded bg-brand-gold text-black flex items-center justify-center font-bold">M</span>
+Professor Mario G. S. Carvalho
+</a>
+
+<p class="max-w-sm">
+Ebooks de alta qualidade selecionados para o seu desenvolvimento espiritual, acadêmico e teológico contínuo.
+</p>
+
+</div>
+
+<div>
+
+<h3 class="text-white font-semibold mb-4">Contato</h3>
+
+<ul class="space-y-3">
+
+<li>
+<a href="https://wa.me/5517991996793" target="_blank" class="flex gap-2">
+<i data-lucide="message-circle"></i> WhatsApp
+</a>
+</li>
+
+<li>
+<a href="https://instagram.com/prof.mariogabriel" target="_blank" class="flex gap-2">
+<i data-lucide="instagram"></i> Instagram
+</a>
+</li>
+
+<li>
+<a href="https://facebook.com/bibliotecateologicadigital" target="_blank" class="flex gap-2">
+<i data-lucide="facebook"></i> Facebook
+</a>
+</li>
+
+<li>
+<a href="https://mariocervo.github.io/Ebooksvariados/" target="_blank" class="flex gap-2">
+<i data-lucide="globe"></i> E-books variados
+</a>
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="border-t border-white/10 pt-8 text-sm flex flex-col md:flex-row justify-between items-center">
+
+<div>
+© 2026 Mario G. S. Carvalho. Todos os direitos reservados.
+</div>
+
+<div class="flex gap-6 mt-4 md:mt-0">
+<a href="#">Privacidade</a>
+<a href="#">Termos de Uso</a>
+</div>
+
+</div>
+
+</div>
+
+</footer>
+
+<!-- ========================= -->
+<!-- MODAL DETALHES DO EBOOK -->
+<!-- ========================= -->
+
+<div id="modalDetalhesEbook" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:10000; justify-content:center; align-items:center;">
+  <div style="background:#111; padding:20px; border-radius:10px; width:500px; max-width:90%; position:relative; color:white; max-height:80vh; overflow-y:auto;">
+    <button id="fecharModalDetalhes" style="position:absolute; top:10px; left:10px; background:transparent; border:none; color:white; font-size:20px; cursor:pointer; display:flex; align-items:center; gap:5px;">
+      ← Voltar
+    </button>
+    <h3 style="color:white; margin-top:30px; margin-bottom:15px; font-size:1.5rem;" id="detalheTitulo">Título</h3>
+    <p style="color:#ccc; margin-bottom:20px; white-space:pre-wrap;" id="detalheDescricao">Descrição</p>
+  </div>
+</div>
+
+<!-- ========================= -->
+<!-- MODAL COMPARTILHAR EBOOK -->
+<!-- ========================= -->
+
+<div id="modalCompartilharEbook" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:10001; justify-content:center; align-items:center;">
+  <div style="background:#111; padding:30px; border-radius:10px; width:550px; max-width:90%; position:relative; color:white; max-height:90vh; overflow-y:auto;">
+    <button id="fecharModalCompartilhar" style="position:absolute; top:10px; left:10px; background:transparent; border:none; color:white; font-size:20px; cursor:pointer; display:flex; align-items:center; gap:5px;">
+      ← Voltar
+    </button>
+    <div style="margin-top:30px; text-align:center;">
+      <img id="compartilharImagem" src="" alt="Ebook" style="width:150px; height:auto; margin:0 auto 15px; border-radius:8px;">
+      <h3 style="font-size:1.5rem; margin-bottom:10px;" id="compartilharTitulo">Título</h3>
+      <div style="background:#222; padding:15px; border-radius:8px; text-align:left; margin-bottom:20px; font-size:0.95rem; color:#ccc; white-space:pre-wrap;" id="compartilharMensagemPreview">
+        <!-- Prévia da mensagem aparecerá aqui -->
+      </div>
+      <p style="margin-bottom:10px; color:white;">Compartilhar via:</p>
+      <div style="display:flex; flex-wrap:wrap; gap:15px; justify-content:center; margin-bottom:20px;">
+        <button class="btn-compartilhar-rede" data-rede="whatsapp" style="background:#25D366; border:none; border-radius:50%; width:50px; height:50px; display:flex; align-items:center; justify-content:center; cursor:pointer;" title="WhatsApp"><i data-lucide="message-circle" style="color:white;"></i></button>
+        <button class="btn-compartilhar-rede" data-rede="whatsapp-business" style="background:#25D366; border:none; border-radius:50%; width:50px; height:50px; display:flex; align-items:center; justify-content:center; cursor:pointer;" title="WhatsApp Business"><i data-lucide="briefcase" style="color:white;"></i></button>
+        <button class="btn-compartilhar-rede" data-rede="gmail" style="background:#D44638; border:none; border-radius:50%; width:50px; height:50px; display:flex; align-items:center; justify-content:center; cursor:pointer;" title="Gmail"><i data-lucide="mail" style="color:white;"></i></button>
+        <button class="btn-compartilhar-rede" data-rede="instagram" style="background:#E4405F; border:none; border-radius:50%; width:50px; height:50px; display:flex; align-items:center; justify-content:center; cursor:pointer;" title="Instagram"><i data-lucide="instagram" style="color:white;"></i></button>
+        <button class="btn-compartilhar-rede" data-rede="facebook" style="background:#1877F2; border:none; border-radius:50%; width:50px; height:50px; display:flex; align-items:center; justify-content:center; cursor:pointer;" title="Facebook"><i data-lucide="facebook" style="color:white;"></i></button>
+        <button class="btn-compartilhar-rede" data-rede="telegram" style="background:#0088cc; border:none; border-radius:50%; width:50px; height:50px; display:flex; align-items:center; justify-content:center; cursor:pointer;" title="Telegram"><i data-lucide="send" style="color:white;"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts auxiliares (avaliações, busca, etc) -->
+<!-- ========================= -->
+<!-- BUSCA NO SITE -->
+<!-- ========================= -->
+
+<div style="position:fixed;top:90px;right:20px;z-index:9999;">
+<input id="buscaSite" placeholder="Buscar no site..."
+style="padding:10px;border-radius:8px;border:none;">
+</div>
+
+<script>
+document.getElementById("buscaSite").addEventListener("keyup",function(){
+
+let termo=this.value.toLowerCase()
+
+document.querySelectorAll("section").forEach(sec=>{
+
+if(sec.innerText.toLowerCase().includes(termo)){
+sec.style.display="block"
+}else{
+sec.style.display="none"
 }
 
-// Função para abrir modal com dados do ebook (detalhes)
-function abrirDetalhes(titulo, descricaoLonga) {
-    if (modalDetalhes) {
-        detalheTitulo.textContent = titulo
-        detalheDescricao.textContent = descricaoLonga || 'Descrição detalhada em breve.'
-        modalDetalhes.style.display = 'flex'
-    }
-}
-
-// Função para abrir modal de compartilhamento
-function abrirCompartilhar(titulo, descricao) {
-    ebookAtual.titulo = titulo
-    ebookAtual.descricao = descricao
-
-    // Criar preview da mensagem
-    const mensagem = `Olá! Estou compartilhando este eBook escrito pelo Professor Mario G. S. de Carvalho. ${titulo} - ${descricao} Acesse pelo link: ${SITE_URL}`
-    if (compartilharMensagemPreview) {
-        compartilharMensagemPreview.textContent = mensagem
-    }
-
-    if (modalCompartilhar) {
-        modalCompartilhar.style.display = 'flex'
-    }
-}
-
-// Função para compartilhar via rede específica
-function compartilhar(rede) {
-    const { titulo, descricao } = ebookAtual
-    const texto = `Olá! Estou compartilhando este eBook escrito pelo Professor Mario G. S. de Carvalho. ${titulo} - ${descricao} Acesse pelo link: ${SITE_URL}`
-    const textoEncoded = encodeURIComponent(texto)
-    const urlEncoded = encodeURIComponent(SITE_URL)
-
-    let link = ''
-
-    switch (rede) {
-        case 'whatsapp':
-            link = `https://wa.me/?text=${textoEncoded}`
-            break
-        case 'whatsapp-business':
-            link = `https://api.whatsapp.com/send?text=${textoEncoded}`
-            break
-        case 'gmail':
-            link = `mailto:?subject=${encodeURIComponent('Compartilhamento de eBook')}&body=${textoEncoded}`
-            break
-        case 'instagram':
-            // Instagram não aceita texto pré-preenchido via URL, apenas abre o app ou site
-            link = 'https://www.instagram.com/'
-            break
-        case 'facebook':
-            link = `https://www.facebook.com/sharer/sharer.php?u=${urlEncoded}&quote=${textoEncoded}`
-            break
-        case 'telegram':
-            link = `https://t.me/share/url?url=${urlEncoded}&text=${textoEncoded}`
-            break
-        default:
-            return
-    }
-
-    window.open(link, '_blank')
-}
-
-// Fechar modal de detalhes
-if (fecharModal) {
-    fecharModal.addEventListener('click', () => {
-        modalDetalhes.style.display = 'none'
-    })
-}
-
-// Fechar modal de compartilhamento
-if (fecharModalCompartilhar) {
-    fecharModalCompartilhar.addEventListener('click', () => {
-        modalCompartilhar.style.display = 'none'
-    })
-}
-
-// Fechar modais ao clicar fora
-if (modalDetalhes) {
-    modalDetalhes.addEventListener('click', (e) => {
-        if (e.target === modalDetalhes) {
-            modalDetalhes.style.display = 'none'
-        }
-    })
-}
-
-if (modalCompartilhar) {
-    modalCompartilhar.addEventListener('click', (e) => {
-        if (e.target === modalCompartilhar) {
-            modalCompartilhar.style.display = 'none'
-        }
-    })
-}
-
-// Renderizar ebooks no catálogo e destaques
-function renderEbooks() {
-    if (catalogoGrid) {
-        catalogoGrid.innerHTML = ebooks.map(book => `
-            <div class="bg-brand-black border border-white/10 rounded-xl p-4 hover:scale-105 transition">
-                <img src="${book.image}" alt="${book.title}" class="rounded mb-4">
-                <h3 class="text-brand-white font-bold text-lg mb-2">${book.title}</h3>
-                <p class="text-brand-gray text-sm mb-4">${book.description}</p>
-                <p class="text-brand-gold font-bold mb-4">${book.price}</p>
-                <button class="btn-detalhes-ebook w-full mb-2 flex items-center justify-center gap-2 bg-black text-white py-2 rounded font-semibold hover:bg-gray-800 transition" 
-                    data-titulo="${book.title}" data-descricaolongaa="${book.longDescription.replace(/"/g, '&quot;')}">
-                    <i data-lucide="info"></i> Ver detalhes
-                </button>
-                <a href="${book.hotmartLink}" target="_blank" class="block text-center bg-brand-gold text-black py-2 rounded font-bold hover:bg-brand-goldlight transition">
-                    Comprar
-                </a>
-                <button class="btn-compartilhar-ebook w-full mt-2 flex items-center justify-center gap-2 bg-black text-white py-2 rounded font-semibold hover:bg-gray-800 transition"
-                    data-titulo="${book.title}" data-descricao="${book.description}">
-                    <i data-lucide="share-2"></i> Compartilhar
-                </button>
-            </div>
-        `).join('')
-    }
-
-    if (destaquesGrid) {
-        // Mostrar apenas os primeiros 3 ebooks como destaque
-        const destaques = ebooks.slice(0, 3)
-        destaquesGrid.innerHTML = destaques.map(book => `
-            <div class="bg-brand-black border border-white/10 rounded-xl p-4 hover:scale-105 transition">
-                <img src="${book.image}" alt="${book.title}" class="rounded mb-4">
-                <h3 class="text-brand-white font-bold text-lg mb-2">${book.title}</h3>
-                <p class="text-brand-gray text-sm mb-4">${book.description}</p>
-                <p class="text-brand-gold font-bold mb-4">${book.price}</p>
-                <button class="btn-detalhes-ebook w-full mb-2 flex items-center justify-center gap-2 bg-black text-white py-2 rounded font-semibold hover:bg-gray-800 transition" 
-                    data-titulo="${book.title}" data-descricaolongaa="${book.longDescription.replace(/"/g, '&quot;')}">
-                    <i data-lucide="info"></i> Ver detalhes
-                </button>
-                <a href="${book.hotmartLink}" target="_blank" class="block text-center bg-brand-gold text-black py-2 rounded font-bold hover:bg-brand-goldlight transition">
-                    Comprar
-                </a>
-                <button class="btn-compartilhar-ebook w-full mt-2 flex items-center justify-center gap-2 bg-black text-white py-2 rounded font-semibold hover:bg-gray-800 transition"
-                    data-titulo="${book.title}" data-descricao="${book.description}">
-                    <i data-lucide="share-2"></i> Compartilhar
-                </button>
-            </div>
-        `).join('')
-    }
-
-    // Adicionar eventos aos botões de detalhes
-    document.querySelectorAll('.btn-detalhes-ebook').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault()
-            const titulo = btn.getAttribute('data-titulo')
-            const descricaoLonga = btn.getAttribute('data-descricaolongaa')
-            abrirDetalhes(titulo, descricaoLonga)
-        })
-    })
-
-    // Adicionar eventos aos botões de compartilhar
-    document.querySelectorAll('.btn-compartilhar-ebook').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault()
-            const titulo = btn.getAttribute('data-titulo')
-            const descricao = btn.getAttribute('data-descricao')
-            abrirCompartilhar(titulo, descricao)
-        })
-    })
-}
-
-// Renderizar cursos (se houver container, senão cria)
-function renderCursos() {
-    if (courses.length === 0) return
-
-    let container = document.getElementById('courses-container')
-    if (!container && cursosSection) {
-        container = document.createElement('div')
-        container.id = 'courses-container'
-        container.className = 'grid grid-cols-1 md:grid-cols-3 gap-8 mt-8'
-        // Insere após o título
-        const titulo = cursosSection.querySelector('h2')
-        if (titulo) {
-            titulo.parentNode.insertBefore(container, titulo.nextSibling)
-        } else {
-            cursosSection.appendChild(container)
-        }
-    }
-    if (container) {
-        container.innerHTML = courses.map(course => `
-            <div class="bg-brand-black border border-white/10 rounded-xl p-4">
-                <img src="${course.image}" alt="${course.title}" class="rounded mb-4">
-                <h3 class="text-brand-white font-bold">${course.title}</h3>
-                <p class="text-brand-gray text-sm">${course.description}</p>
-                <a href="${course.link}" class="block text-center bg-brand-gold text-black py-2 rounded mt-4">Ver Curso</a>
-            </div>
-        `).join('')
-    }
-}
-
-// Renderizar artigos (similar)
-function renderArtigos() {
-    if (articles.length === 0) return
-
-    let container = document.getElementById('articles-container')
-    if (!container && artigosSection) {
-        container = document.createElement('div')
-        container.id = 'articles-container'
-        container.className = 'grid grid-cols-1 md:grid-cols-3 gap-8 mt-8'
-        const titulo = artigosSection.querySelector('h2')
-        if (titulo) {
-            titulo.parentNode.insertBefore(container, titulo.nextSibling)
-        } else {
-            artigosSection.appendChild(container)
-        }
-    }
-    if (container) {
-        container.innerHTML = articles.map(article => `
-            <div class="bg-brand-black border border-white/10 rounded-xl p-4">
-                <img src="${article.image}" alt="${article.title}" class="rounded mb-4">
-                <h3 class="text-brand-white font-bold">${article.title}</h3>
-                <p class="text-brand-gray text-sm">${article.date} - ${article.category}</p>
-            </div>
-        `).join('')
-    }
-}
-
-// Eventos para botões de compartilhamento dentro do modal
-document.querySelectorAll('.btn-compartilhar-rede').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const rede = btn.getAttribute('data-rede')
-        compartilhar(rede)
-    })
 })
 
-// Inicialização
-document.addEventListener('DOMContentLoaded', () => {
-    renderEbooks()
-    renderCursos()
-    renderArtigos()
+})
+</script>
+
+<!-- ========================= -->
+<!-- NEWSLETTER E SUGESTÕES (DUAS COLUNAS) -->
+<!-- ========================= -->
+
+<section style="padding:80px 20px;background:#111;">
+  <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px;">
     
-    // Atualizar ícones Lucide
-    if (typeof lucide !== 'undefined') {
-        lucide.createIcons()
+    <!-- COLUNA 1: SUGESTÃO DE EBOOK -->
+    <div style="text-align:center;">
+      <h2 style="font-size:28px;margin-bottom:10px;color:white;">Qual tema de Teologia ou Bíblia você gostaria de ler?</h2>
+      <p style="color:#ccc;margin-bottom:20px;">💬 Escreva sua sugestão abaixo. Sua ideia pode se tornar meu próximo eBook.</p>
+      <textarea id="sugestaoEbook" placeholder="Digite sua sugestão (máximo 200 caracteres)" maxlength="200" style="padding:12px;border-radius:8px;border:none;margin-bottom:10px;width:100%;background:#222;color:white;" rows="3"></textarea>
+      <input type="email" id="emailSugestao" placeholder="Seu e-mail para contato" required style="padding:12px;border-radius:8px;border:none;margin-bottom:10px;width:100%;background:#222;color:white;">
+      <button onclick="enviarSugestao()" style="padding:12px 20px;border-radius:8px;background:#D4AF37;border:none;font-weight:bold;color:black;cursor:pointer;width:100%;">ENVIAR</button>
+    </div>
+    
+    <!-- COLUNA 2: ESTUDOS BÍBLICOS NO EMAIL -->
+    <div style="text-align:center;">
+      <h2 style="font-size:28px;margin-bottom:10px;color:white;">Receba estudos bíblicos no seu e-mail</h2>
+      <p style="color:#ccc;margin-bottom:20px;">Escolha os temas que você gostaria de aprender e receba conteúdos exclusivos.</p>
+      <textarea id="sugestaoEstudos" placeholder="Digite os temas de interesse (máximo 200 caracteres)" maxlength="200" style="padding:12px;border-radius:8px;border:none;margin-bottom:10px;width:100%;background:#222;color:white;" rows="3"></textarea>
+      <input type="email" id="emailEstudos" placeholder="Seu e-mail para receber os estudos" required style="padding:12px;border-radius:8px;border:none;margin-bottom:10px;width:100%;background:#222;color:white;">
+      <button onclick="enviarEstudos()" style="padding:12px 20px;border-radius:8px;background:#D4AF37;border:none;font-weight:bold;color:black;cursor:pointer;width:100%;">ENVIAR</button>
+    </div>
+  </div>
+</section>
+
+<script>
+function enviarSugestao() {
+    const sugestao = document.getElementById('sugestaoEbook').value.trim();
+    const email = document.getElementById('emailSugestao').value.trim();
+
+    if (!sugestao) {
+        alert('Por favor, escreva sua sugestão.');
+        return;
     }
+    if (!email) {
+        alert('Por favor, informe seu e-mail.');
+        return;
+    }
+    if (!email.includes('@') || !email.includes('.')) {
+        alert('Por favor, informe um e-mail válido.');
+        return;
+    }
+
+    const assunto = encodeURIComponent('Sugestão de eBook - Tema Teológico');
+    const corpo = encodeURIComponent(
+        `Tema sugerido: ${sugestao}\n\n` +
+        `E-mail para contato: ${email}`
+    );
+    window.location.href = `mailto:mariocervo@outlook.com?subject=${assunto}&body=${corpo}`;
+}
+
+function enviarEstudos() {
+    const temas = document.getElementById('sugestaoEstudos').value.trim();
+    const email = document.getElementById('emailEstudos').value.trim();
+
+    if (!temas) {
+        alert('Por favor, escreva os temas de interesse.');
+        return;
+    }
+    if (!email) {
+        alert('Por favor, informe seu e-mail.');
+        return;
+    }
+    if (!email.includes('@') || !email.includes('.')) {
+        alert('Por favor, informe um e-mail válido.');
+        return;
+    }
+
+    const assunto = encodeURIComponent('Interesse em Estudos Bíblicos');
+    const corpo = encodeURIComponent(
+        `Temas de interesse: ${temas}\n\n` +
+        `E-mail para contato: ${email}`
+    );
+    window.location.href = `mailto:mariocervo@outlook.com?subject=${assunto}&body=${corpo}`;
+}
+</script>
+
+<!-- ========================= -->
+<!-- DARK / LIGHT MODE -->
+<!-- ========================= -->
+
+<button id="modoBtn"
+style="position:fixed;bottom:100px;right:20px;padding:12px;border-radius:50%;z-index:9999;">
+🌙
+</button>
+
+<script>
+
+let modo=localStorage.getItem("modo")
+
+if(modo==="light"){
+document.body.style.background="#ffffff"
+document.body.style.color="#000000"
+}
+
+document.getElementById("modoBtn").onclick=function(){
+
+if(document.body.style.background==="white"){
+
+document.body.style.background="#0A0A0A"
+document.body.style.color="#fff"
+localStorage.setItem("modo","dark")
+
+}else{
+
+document.body.style.background="white"
+document.body.style.color="#000"
+localStorage.setItem("modo","light")
+
+}
+
+}
+
+</script>
+
+<!-- ========================= -->
+<!-- SISTEMA DE AVALIAÇÕES -->
+<!-- ========================= -->
+
+<div id="modalAvaliar"
+style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#000a;z-index:9999;justify-content:center;align-items:center;">
+
+<div style="background:#111;padding:30px;border-radius:10px;width:300px;">
+
+<h3>Deixe sua avaliação</h3>
+
+<input id="nomeAvaliador" placeholder="Seu nome"
+style="width:100%;margin:10px 0;padding:8px;">
+
+<textarea id="comentarioAvaliacao" placeholder="Comentário"
+style="width:100%;margin:10px 0;padding:8px;"></textarea>
+
+<button onclick="enviarAvaliacao()">Enviar</button>
+
+<button onclick="fecharAval()">Fechar</button>
+
+</div>
+
+</div>
+
+<script>
+
+document.getElementById("btnAvaliar").onclick=function(){
+
+document.getElementById("modalAvaliar").style.display="flex"
+
+}
+
+function fecharAval(){
+
+document.getElementById("modalAvaliar").style.display="none"
+
+}
+
+function enviarAvaliacao(){
+
+let nome=document.getElementById("nomeAvaliador").value
+let texto=document.getElementById("comentarioAvaliacao").value
+
+if(!nome||!texto)return alert("Preencha tudo")
+
+let avaliacoes=JSON.parse(localStorage.getItem("avaliacoes")||"[]")
+
+avaliacoes.push({nome,texto})
+
+localStorage.setItem("avaliacoes",JSON.stringify(avaliacoes))
+
+location.reload()
+
+}
+
+window.onload=function(){
+
+let avaliacoes=JSON.parse(localStorage.getItem("avaliacoes")||"[]")
+
+let grid=document.getElementById("depoimentos-grid")
+
+avaliacoes.forEach(a=>{
+
+let div=document.createElement("div")
+
+div.innerHTML=`
+<div style="background:#111;padding:20px;border-radius:10px;">
+<strong>${a.nome}</strong>
+<p>${a.texto}</p>
+</div>
+`
+
+grid.appendChild(div)
+
 })
+
+document.getElementById("contadorAvaliacoes").innerText=
+avaliacoes.length+" avaliações"
+
+}
+
+</script>
+
+<!-- ========================= -->
+<!-- LOGIN SIMPLES -->
+<!-- ========================= -->
+
+<div id="loginBox"
+style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+background:#111;padding:30px;border-radius:10px;display:none;z-index:9999;">
+
+<h3>Área do aluno</h3>
+
+<input id="loginEmail" placeholder="Email"
+style="display:block;margin:10px 0;padding:8px;">
+
+<input id="loginSenha" type="password" placeholder="Senha"
+style="display:block;margin:10px 0;padding:8px;">
+
+<button onclick="logar()">Entrar</button>
+
+</div>
+
+<script>
+
+function logar(){
+
+let email=document.getElementById("loginEmail").value
+
+localStorage.setItem("usuario",email)
+
+alert("Login realizado")
+
+document.getElementById("loginBox").style.display="none"
+
+}
+
+</script>
+
+<!-- ========================= -->
+<!-- BLOG AUTOMÁTICO -->
+<!-- ========================= -->
+
+<section style="padding:80px;background:#111;">
+<div id="blogPosts" style="max-width:800px;margin:auto;"></div>
+</section>
+
+<script>
+let posts=[]
+</script>
+
+<!-- ========================= -->
+<!-- VIDEO DE CURSO -->
+<!-- ========================= -->
+
+<div style="text-align:center;padding:80px;">
+
+<h2>AULA GRATUITA EM BREVE</h2>
+
+<button onclick="abrirVideo()">▶ Assistir Aula</button>
+
+</div>
+
+<div id="videoModal"
+style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#000c;z-index:9999;justify-content:center;align-items:center;">
+
+<div>
+
+<iframe width="560" height="315"
+src=""
+allowfullscreen></iframe>
+
+<br><button onclick="fecharVideo()">Fechar</button>
+
+</div>
+
+</div>
+
+<script>
+
+function abrirVideo(){
+document.getElementById("videoModal").style.display="flex"
+}
+
+function fecharVideo(){
+document.getElementById("videoModal").style.display="none"
+}
+
+</script>
+
+<!-- ========================= -->
+<!-- GOOGLE ANALYTICS -->
+<!-- ========================= -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXX"></script>
+
+<script>
+window.dataLayer=window.dataLayer||[]
+function gtag(){dataLayer.push(arguments)}
+gtag('js',new Date())
+gtag('config','G-XXXX')
+</script>
+
+<!-- ========================= -->
+<!-- META PIXEL -->
+<!-- ========================= -->
+
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)}
+if(!f._fbq)f._fbq=n
+n.push=n
+n.loaded=!0
+n.version='2.0'
+n.queue=[]
+t=b.createElement(e)
+t.async=!0
+t.src=v
+s=b.getElementsByTagName(e)[0]
+s.parentNode.insertBefore(t,s)
+
+}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js')
+
+fbq('init','PIXEL_ID')
+fbq('track','PageView')
+</script>
+
+<!-- Módulo principal (app.js) -->
+<script type="module" src="app.js"></script>
+
+<!-- Inicialização de ícones e scroll reveal (já existe no app.js, mas mantemos aqui também para garantir) -->
+<script>
+  // Inicialização extra para ícones que não estão nos cards (navbar, etc)
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof lucide !== 'undefined') {
+      lucide.createIcons();
+    }
+    // ScrollReveal
+    if (typeof ScrollReveal !== 'undefined') {
+      ScrollReveal().reveal('section', {
+        distance:'40px',
+        duration:800,
+        origin:'bottom',
+        interval:100
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
