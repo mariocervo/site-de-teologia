@@ -12,7 +12,21 @@ const fecharModal = document.getElementById('fecharModalDetalhes')
 const detalheTitulo = document.getElementById('detalheTitulo')
 const detalheDescricao = document.getElementById('detalheDescricao')
 
-// Função para abrir modal com dados do ebook (agora usando longDescription)
+// Modal de compartilhamento
+const modalCompartilhar = document.getElementById('modalCompartilharEbook')
+const fecharModalCompartilhar = document.getElementById('fecharModalCompartilhar')
+const compartilharMensagemPreview = document.getElementById('compartilharMensagemPreview')
+
+// URL base do site (para compartilhamento)
+const SITE_URL = 'https://mariocervo.github.io/site-de-teologia/'
+
+// Variáveis para armazenar dados do ebook a ser compartilhado
+let ebookAtual = {
+    titulo: '',
+    descricao: ''
+}
+
+// Função para abrir modal com dados do ebook (detalhes)
 function abrirDetalhes(titulo, descricaoLonga) {
     if (modalDetalhes) {
         detalheTitulo.textContent = titulo
@@ -21,18 +35,85 @@ function abrirDetalhes(titulo, descricaoLonga) {
     }
 }
 
-// Fechar modal
+// Função para abrir modal de compartilhamento
+function abrirCompartilhar(titulo, descricao) {
+    ebookAtual.titulo = titulo
+    ebookAtual.descricao = descricao
+
+    // Criar preview da mensagem
+    const mensagem = `Olá! Estou compartilhando este eBook escrito pelo Professor Mario G. S. de Carvalho. ${titulo} - ${descricao} Acesse pelo link: ${SITE_URL}`
+    if (compartilharMensagemPreview) {
+        compartilharMensagemPreview.textContent = mensagem
+    }
+
+    if (modalCompartilhar) {
+        modalCompartilhar.style.display = 'flex'
+    }
+}
+
+// Função para compartilhar via rede específica
+function compartilhar(rede) {
+    const { titulo, descricao } = ebookAtual
+    const texto = `Olá! Estou compartilhando este eBook escrito pelo Professor Mario G. S. de Carvalho. ${titulo} - ${descricao} Acesse pelo link: ${SITE_URL}`
+    const textoEncoded = encodeURIComponent(texto)
+    const urlEncoded = encodeURIComponent(SITE_URL)
+
+    let link = ''
+
+    switch (rede) {
+        case 'whatsapp':
+            link = `https://wa.me/?text=${textoEncoded}`
+            break
+        case 'whatsapp-business':
+            link = `https://api.whatsapp.com/send?text=${textoEncoded}`
+            break
+        case 'gmail':
+            link = `mailto:?subject=${encodeURIComponent('Compartilhamento de eBook')}&body=${textoEncoded}`
+            break
+        case 'instagram':
+            // Instagram não aceita texto pré-preenchido via URL, apenas abre o app ou site
+            link = 'https://www.instagram.com/'
+            break
+        case 'facebook':
+            link = `https://www.facebook.com/sharer/sharer.php?u=${urlEncoded}&quote=${textoEncoded}`
+            break
+        case 'telegram':
+            link = `https://t.me/share/url?url=${urlEncoded}&text=${textoEncoded}`
+            break
+        default:
+            return
+    }
+
+    window.open(link, '_blank')
+}
+
+// Fechar modal de detalhes
 if (fecharModal) {
     fecharModal.addEventListener('click', () => {
         modalDetalhes.style.display = 'none'
     })
 }
 
-// Fechar ao clicar fora
+// Fechar modal de compartilhamento
+if (fecharModalCompartilhar) {
+    fecharModalCompartilhar.addEventListener('click', () => {
+        modalCompartilhar.style.display = 'none'
+    })
+}
+
+// Fechar modais ao clicar fora
 if (modalDetalhes) {
     modalDetalhes.addEventListener('click', (e) => {
         if (e.target === modalDetalhes) {
             modalDetalhes.style.display = 'none'
+        }
+    })
+}
+
+if (modalCompartilhar) {
+    modalCompartilhar.addEventListener('click', (e) => {
+        if (e.target === modalCompartilhar) {
+            modalCompartilhar.style.display = 'none'
         }
     })
 }
@@ -53,6 +134,10 @@ function renderEbooks() {
                 <a href="${book.hotmartLink}" target="_blank" class="block text-center bg-brand-gold text-black py-2 rounded font-bold hover:bg-brand-goldlight transition">
                     Comprar
                 </a>
+                <button class="btn-compartilhar-ebook w-full mt-2 flex items-center justify-center gap-2 bg-black text-white py-2 rounded font-semibold hover:bg-gray-800 transition"
+                    data-titulo="${book.title}" data-descricao="${book.description}">
+                    <i data-lucide="share-2"></i> Compartilhar
+                </button>
             </div>
         `).join('')
     }
@@ -73,6 +158,10 @@ function renderEbooks() {
                 <a href="${book.hotmartLink}" target="_blank" class="block text-center bg-brand-gold text-black py-2 rounded font-bold hover:bg-brand-goldlight transition">
                     Comprar
                 </a>
+                <button class="btn-compartilhar-ebook w-full mt-2 flex items-center justify-center gap-2 bg-black text-white py-2 rounded font-semibold hover:bg-gray-800 transition"
+                    data-titulo="${book.title}" data-descricao="${book.description}">
+                    <i data-lucide="share-2"></i> Compartilhar
+                </button>
             </div>
         `).join('')
     }
@@ -84,6 +173,16 @@ function renderEbooks() {
             const titulo = btn.getAttribute('data-titulo')
             const descricaoLonga = btn.getAttribute('data-descricaolongaa')
             abrirDetalhes(titulo, descricaoLonga)
+        })
+    })
+
+    // Adicionar eventos aos botões de compartilhar
+    document.querySelectorAll('.btn-compartilhar-ebook').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault()
+            const titulo = btn.getAttribute('data-titulo')
+            const descricao = btn.getAttribute('data-descricao')
+            abrirCompartilhar(titulo, descricao)
         })
     })
 }
@@ -143,6 +242,14 @@ function renderArtigos() {
         `).join('')
     }
 }
+
+// Eventos para botões de compartilhamento dentro do modal
+document.querySelectorAll('.btn-compartilhar-rede').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const rede = btn.getAttribute('data-rede')
+        compartilhar(rede)
+    })
+})
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', () => {
