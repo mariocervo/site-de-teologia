@@ -15,16 +15,9 @@ const detalheDescricao = document.getElementById('detalheDescricao')
 // Modal de compartilhamento
 const modalCompartilhar = document.getElementById('modalCompartilharEbook')
 const fecharModalCompartilhar = document.getElementById('fecharModalCompartilhar')
+const compartilharImagem = document.getElementById('compartilharImagem')
+const compartilharTitulo = document.getElementById('compartilharTitulo')
 const compartilharMensagemPreview = document.getElementById('compartilharMensagemPreview')
-
-// URL base do site (para compartilhamento)
-const SITE_URL = 'https://mariocervo.github.io/site-de-teologia/'
-
-// Variáveis para armazenar dados do ebook a ser compartilhado
-let ebookAtual = {
-    titulo: '',
-    descricao: ''
-}
 
 // Função para abrir modal com dados do ebook (detalhes)
 function abrirDetalhes(titulo, descricaoLonga) {
@@ -36,55 +29,63 @@ function abrirDetalhes(titulo, descricaoLonga) {
 }
 
 // Função para abrir modal de compartilhamento
-function abrirCompartilhar(titulo, descricao) {
-    ebookAtual.titulo = titulo
-    ebookAtual.descricao = descricao
+function abrirCompartilhar(titulo, descricao, imagem, link) {
+    if (!modalCompartilhar) return
 
-    // Criar preview da mensagem
-    const mensagem = `Olá! Estou compartilhando este eBook escrito pelo Professor Mario G. S. de Carvalho. ${titulo} - ${descricao} Acesse pelo link: ${SITE_URL}`
-    if (compartilharMensagemPreview) {
-        compartilharMensagemPreview.textContent = mensagem
-    }
+    // Preencher dados
+    compartilharImagem.src = imagem
+    compartilharTitulo.textContent = titulo
 
-    if (modalCompartilhar) {
-        modalCompartilhar.style.display = 'flex'
-    }
+    // Montar mensagem de prévia
+    const mensagem = `Olá! Estou compartilhando este eBook escrito pelo Professor Mario G. S. de Carvalho. ${titulo} - ${descricao} Acesse pelo link: ${link}`
+    compartilharMensagemPreview.textContent = mensagem
+
+    // Armazenar dados para os botões de rede
+    modalCompartilhar.dataset.titulo = titulo
+    modalCompartilhar.dataset.descricao = descricao
+    modalCompartilhar.dataset.imagem = imagem
+    modalCompartilhar.dataset.link = link
+
+    modalCompartilhar.style.display = 'flex'
 }
 
 // Função para compartilhar via rede específica
 function compartilhar(rede) {
-    const { titulo, descricao } = ebookAtual
-    const texto = `Olá! Estou compartilhando este eBook escrito pelo Professor Mario G. S. de Carvalho. ${titulo} - ${descricao} Acesse pelo link: ${SITE_URL}`
-    const textoEncoded = encodeURIComponent(texto)
-    const urlEncoded = encodeURIComponent(SITE_URL)
+    const titulo = modalCompartilhar.dataset.titulo || ''
+    const descricao = modalCompartilhar.dataset.descricao || ''
+    const link = modalCompartilhar.dataset.link || ''
 
-    let link = ''
+    const texto = `Olá! Estou compartilhando este eBook escrito pelo Professor Mario G. S. de Carvalho. ${titulo} - ${descricao} Acesse pelo link: ${link}`
+    const textoEncoded = encodeURIComponent(texto)
+    const linkEncoded = encodeURIComponent(link)
+
+    let url = ''
 
     switch (rede) {
         case 'whatsapp':
-            link = `https://wa.me/?text=${textoEncoded}`
+            url = `https://wa.me/?text=${textoEncoded}`
             break
         case 'whatsapp-business':
-            link = `https://api.whatsapp.com/send?text=${textoEncoded}`
+            url = `https://api.whatsapp.com/send?text=${textoEncoded}`
             break
         case 'gmail':
-            link = `mailto:?subject=${encodeURIComponent('Compartilhamento de eBook')}&body=${textoEncoded}`
+            url = `mailto:?subject=${encodeURIComponent('Compartilhamento de eBook')}&body=${textoEncoded}`
             break
         case 'instagram':
-            // Instagram não aceita texto pré-preenchido via URL, apenas abre o app ou site
-            link = 'https://www.instagram.com/'
+            // Instagram não suporta texto pré-preenchido via URL, abre a página inicial
+            url = 'https://www.instagram.com/'
             break
         case 'facebook':
-            link = `https://www.facebook.com/sharer/sharer.php?u=${urlEncoded}&quote=${textoEncoded}`
+            url = `https://www.facebook.com/sharer/sharer.php?u=${linkEncoded}&quote=${textoEncoded}`
             break
         case 'telegram':
-            link = `https://t.me/share/url?url=${urlEncoded}&text=${textoEncoded}`
+            url = `https://t.me/share/url?url=${linkEncoded}&text=${textoEncoded}`
             break
         default:
             return
     }
 
-    window.open(link, '_blank')
+    window.open(url, '_blank')
 }
 
 // Fechar modal de detalhes
@@ -135,7 +136,7 @@ function renderEbooks() {
                     Comprar
                 </a>
                 <button class="btn-compartilhar-ebook w-full mt-2 flex items-center justify-center gap-2 bg-black text-white py-2 rounded font-semibold hover:bg-gray-800 transition"
-                    data-titulo="${book.title}" data-descricao="${book.description}">
+                    data-titulo="${book.title}" data-descricao="${book.description}" data-imagem="${book.image}" data-link="${book.hotmartLink}">
                     <i data-lucide="share-2"></i> Compartilhar
                 </button>
             </div>
@@ -159,7 +160,7 @@ function renderEbooks() {
                     Comprar
                 </a>
                 <button class="btn-compartilhar-ebook w-full mt-2 flex items-center justify-center gap-2 bg-black text-white py-2 rounded font-semibold hover:bg-gray-800 transition"
-                    data-titulo="${book.title}" data-descricao="${book.description}">
+                    data-titulo="${book.title}" data-descricao="${book.description}" data-imagem="${book.image}" data-link="${book.hotmartLink}">
                     <i data-lucide="share-2"></i> Compartilhar
                 </button>
             </div>
@@ -182,10 +183,20 @@ function renderEbooks() {
             e.preventDefault()
             const titulo = btn.getAttribute('data-titulo')
             const descricao = btn.getAttribute('data-descricao')
-            abrirCompartilhar(titulo, descricao)
+            const imagem = btn.getAttribute('data-imagem')
+            const link = btn.getAttribute('data-link')
+            abrirCompartilhar(titulo, descricao, imagem, link)
         })
     })
 }
+
+// Eventos para botões de compartilhamento dentro do modal
+document.querySelectorAll('.btn-compartilhar-rede').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const rede = btn.getAttribute('data-rede')
+        compartilhar(rede)
+    })
+})
 
 // Renderizar cursos (se houver container, senão cria)
 function renderCursos() {
@@ -242,14 +253,6 @@ function renderArtigos() {
         `).join('')
     }
 }
-
-// Eventos para botões de compartilhamento dentro do modal
-document.querySelectorAll('.btn-compartilhar-rede').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const rede = btn.getAttribute('data-rede')
-        compartilhar(rede)
-    })
-})
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', () => {
