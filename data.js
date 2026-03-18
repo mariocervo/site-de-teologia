@@ -51,6 +51,37 @@ Imagine ler o Apocalipse e, finalmente, entender:
     hotmartLink:'https://pay.hotmart.com/W104760699Q?checkoutMode=10&split=6'
   },
   {
+    id:4,
+    title:'Vivendo para a Glória de Deus',
+    description:'A Doxologia como Estilo de Vida, Ministério e Culto Racional. Um convite para redescobrir o propósito mais elevado da vida cristã.',
+    longDescription: `Você já sentiu que sua adoração a Deus pode ir além do que você vive atualmente? Já participou de cultos, cantou louvores, se emocionou, mas, ao sair da igreja, percebeu que algo essencial ficou vazio? Se essa inquietação já passou pelo seu coração, saiba que você não está sozinho. E a resposta para essa sede pode estar mais perto do que você imagina.
+
+Vivemos em uma época em que a atividade religiosa nunca foi tão intensa. Músicas são lançadas diariamente, ministérios de louvor se multiplicam e eventos de adoração reúnem multidões. No entanto, paradoxalmente, muitos cristãos enfrentam uma crise silenciosa: a superficialidade espiritual. A adoração, que deveria ser o centro da vida com Deus, muitas vezes se reduz a momentos emocionais dentro do templo, desconectados da realidade do dia a dia.
+
+Foi pensando nessa urgência que o teólogo e ministro Mario G. S. de Carvalho escreveu "Vivendo para a Glória de Deus". Este não é apenas um livro sobre adoração; é um convite profundo e transformador para redescobrir o propósito mais elevado da vida cristã: viver integralmente para a glória de Deus.
+
+Dentro deste guia bíblico, pastoral e devocional, você vai descobrir:
+
+• O Propósito Supremo da sua Existência: Compreenda, de uma vez por todas, que você foi criado para a glória de Deus e como essa verdade reorganiza prioridades, cura frustrações e dá sentido à sua fé.
+• A Diferença Entre Emoção e Verdadeira Adoração: Aprenda a equilibrar sentimentos e fundamento bíblico, desenvolvendo uma espiritualidade madura que não depende apenas de experiências passageiras.
+• O Significado Profundo do Culto Racional: Baseado em Romanos 12:1, entenda como oferecer toda a sua vida – corpo, mente e emoções – como um sacrifício vivo, santo e agradável a Deus.
+• Adoração Além do Templo: Descubra como transformar seu trabalho, sua família, suas decisões diárias e até mesmo o sofrimento em atos concretos de louvor e glorificação a Deus.
+• Superando a Crise do Louvor Moderno: Identifique as armadilhas da superficialidade, do emocionalismo e da cultura da performance, e encontre caminhos bíblicos para uma adoração saudável e centrada em Cristo.
+• Como Construir um Ministério de Louvor Saudável: Princípios práticos para líderes e músicos sobre identidade, humildade, unidade, excelência com propósito espiritual e formação de equipes que fluem na presença de Deus.
+• Critérios Bíblicos para Canções e Cultos: Desenvolva discernimento espiritual para escolher repertórios que alimentem a fé da igreja com teologia sólida e profundidade.
+• O Papel da Liderança em Formar Adoradores: Uma visão essencial para pastores e líderes sobre como pastorear uma igreja que vive a doxologia como estilo de vida.
+
+Mais do que um estudo teológico, este eBook é um despertamento. Cada página foi escrita para provocar consciência espiritual, gerar fome por Deus e conduzir você a uma experiência de adoração que transborda do templo para toda a existência.
+
+Se você é cristão, líder, ministro de louvor ou simplesmente alguém que anseia por uma vida com mais significado diante de Deus, este livro é para você.
+
+Chegou a hora de sua adoração deixar de ser um momento e se tornar a sua própria vida. Desperte para a glória de Deus!`,
+    price:'De R$ 97,00 por 6x de R$ 08,82',
+    category:'teologia',
+    image:'img/doxologia.webp',
+    hotmartLink:'https://pay.hotmart.com/Q104960282P?checkoutMode=10&split=6'
+  },
+  {
     id:3,
     title:'Bíblia na Ponta da Língua',
     description:'Aprenda técnicas de memorização bíblica usando repetição estratégica.',
