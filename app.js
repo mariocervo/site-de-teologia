@@ -22,14 +22,19 @@ const compartilharMensagemPreview = document.getElementById('compartilharMensage
 // URL base do site (para compartilhamento)
 const SITE_URL = 'https://mariocervo.github.io/site-de-teologia/'
 
-// Função para forçar a renderização dos ícones Lucide dentro do modal de compartilhamento
+/**
+ * Função que força a renderização dos ícones Lucide dentro do modal de compartilhamento.
+ * Remove qualquer SVG anterior e recria os ícones apenas no escopo do modal.
+ */
 function renderizarIconesModal() {
-    if (typeof lucide !== 'undefined' && modalCompartilhar) {
-        // Remove os SVGs antigos (se existirem) e recria os ícones apenas dentro do modal
-        const iconesAntigos = modalCompartilhar.querySelectorAll('svg')
-        iconesAntigos.forEach(svg => svg.remove())
-        lucide.createIcons({ root: modalCompartilhar })
-    }
+    if (!modalCompartilhar || typeof lucide === 'undefined') return
+
+    // Remove todos os SVGs que possam ter sido criados anteriormente dentro do modal
+    const svgsExistentes = modalCompartilhar.querySelectorAll('svg')
+    svgsExistentes.forEach(svg => svg.remove())
+
+    // Recria os ícones usando o modal como raiz
+    lucide.createIcons({ root: modalCompartilhar })
 }
 
 // Função para abrir modal com dados do ebook (detalhes)
@@ -63,8 +68,11 @@ function abrirCompartilhar(titulo, descricao, imagem) {
     // Exibir o modal
     modalCompartilhar.style.display = 'flex'
 
-    // Forçar a renderização dos ícones dentro do modal
+    // Renderizar os ícones (garantir que apareçam)
     renderizarIconesModal()
+
+    // Pequeno atraso para garantir que o DOM esteja estável (fallback)
+    setTimeout(() => renderizarIconesModal(), 50)
 }
 
 // Função para compartilhar via rede específica
@@ -87,6 +95,7 @@ function compartilhar(rede) {
             url = `mailto:?subject=${encodeURIComponent('Compartilhamento de eBook')}&body=${textoEncoded}`
             break
         case 'instagram':
+            // Instagram não suporta texto pré-preenchido via URL, abre a página inicial
             url = 'https://www.instagram.com/'
             break
         case 'facebook':
@@ -158,6 +167,7 @@ function renderEbooks() {
     }
 
     if (destaquesGrid) {
+        // Mostrar apenas os primeiros 3 ebooks como destaque
         const destaques = ebooks.slice(0, 3)
         destaquesGrid.innerHTML = destaques.map(book => `
             <div class="bg-brand-black border border-white/10 rounded-xl p-4 hover:scale-105 transition">
@@ -180,6 +190,7 @@ function renderEbooks() {
         `).join('')
     }
 
+    // Adicionar eventos aos botões de detalhes
     document.querySelectorAll('.btn-detalhes-ebook').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault()
@@ -189,6 +200,7 @@ function renderEbooks() {
         })
     })
 
+    // Adicionar eventos aos botões de compartilhar
     document.querySelectorAll('.btn-compartilhar-ebook').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault()
@@ -208,7 +220,7 @@ document.querySelectorAll('.btn-compartilhar-rede').forEach(btn => {
     })
 })
 
-// Renderizar cursos
+// Renderizar cursos (se houver container, senão cria)
 function renderCursos() {
     if (courses.length === 0) return
 
@@ -217,6 +229,7 @@ function renderCursos() {
         container = document.createElement('div')
         container.id = 'courses-container'
         container.className = 'grid grid-cols-1 md:grid-cols-3 gap-8 mt-8'
+        // Insere após o título
         const titulo = cursosSection.querySelector('h2')
         if (titulo) {
             titulo.parentNode.insertBefore(container, titulo.nextSibling)
@@ -236,7 +249,7 @@ function renderCursos() {
     }
 }
 
-// Renderizar artigos
+// Renderizar artigos (similar)
 function renderArtigos() {
     if (articles.length === 0) return
 
@@ -269,6 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderCursos()
     renderArtigos()
     
+    // Atualizar ícones Lucide fora do modal (navbar, etc.)
     if (typeof lucide !== 'undefined') {
         lucide.createIcons()
     }
