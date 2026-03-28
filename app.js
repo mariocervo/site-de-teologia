@@ -22,6 +22,21 @@ const compartilharMensagemPreview = document.getElementById('compartilharMensage
 // URL base do site (para compartilhamento)
 const SITE_URL = 'https://mariocervo.github.io/site-de-teologia/'
 
+/**
+ * Função que força a renderização dos ícones Lucide dentro do modal de compartilhamento.
+ * Remove qualquer SVG anterior e recria os ícones apenas no escopo do modal.
+ */
+function renderizarIconesModal() {
+    if (!modalCompartilhar || typeof lucide === 'undefined') return
+
+    // Remove todos os SVGs que possam ter sido criados anteriormente dentro do modal
+    const svgsExistentes = modalCompartilhar.querySelectorAll('svg')
+    svgsExistentes.forEach(svg => svg.remove())
+
+    // Recria os ícones usando o modal como raiz
+    lucide.createIcons({ root: modalCompartilhar })
+}
+
 // Função para abrir modal com dados do ebook (detalhes)
 function abrirDetalhes(titulo, descricaoLonga) {
     if (modalDetalhes) {
@@ -50,7 +65,13 @@ function abrirCompartilhar(titulo, descricao, imagem) {
     modalCompartilhar.dataset.imagem = imagem
     modalCompartilhar.dataset.link = link
 
+    // Exibir o modal
     modalCompartilhar.style.display = 'flex'
+
+    // Forçar a renderização dos ícones dentro do modal
+    renderizarIconesModal()
+    // Pequeno atraso para garantir que o DOM esteja estável (fallback)
+    setTimeout(renderizarIconesModal, 50)
 }
 
 // Função para compartilhar via rede específica
@@ -73,7 +94,6 @@ function compartilhar(rede) {
             url = `mailto:?subject=${encodeURIComponent('Compartilhamento de eBook')}&body=${textoEncoded}`
             break
         case 'instagram':
-            // Instagram não suporta texto pré-preenchido via URL, abre a página inicial
             url = 'https://www.instagram.com/'
             break
         case 'facebook':
@@ -260,7 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderCursos()
     renderArtigos()
     
-    // Atualizar ícones Lucide
+    // Atualizar ícones Lucide fora do modal (navbar, etc.)
     if (typeof lucide !== 'undefined') {
         lucide.createIcons()
     }
