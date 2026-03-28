@@ -27,14 +27,23 @@ const SITE_URL = 'https://mariocervo.github.io/site-de-teologia/'
  * Remove quaisquer SVGs existentes e recria os ícones a partir dos elementos <i data-lucide="...">.
  */
 function renderizarIconesModal() {
-    if (!modalCompartilhar || typeof lucide === 'undefined') return
+    if (!modalCompartilhar) {
+        console.warn('Modal de compartilhamento não encontrado')
+        return
+    }
+    if (typeof lucide === 'undefined') {
+        console.warn('Lucide não está carregado')
+        return
+    }
 
-    // Remove todos os SVGs que estejam dentro do modal
+    // Remove todos os SVGs que estejam dentro do modal (evita duplicação)
     const svgs = modalCompartilhar.querySelectorAll('svg')
     svgs.forEach(svg => svg.remove())
+    console.log(`Removidos ${svgs.length} SVGs antigos do modal`)
 
     // Recria os ícones, escaneando apenas o modal
     lucide.createIcons({ root: modalCompartilhar })
+    console.log('Ícones recriados dentro do modal')
 }
 
 // Função para abrir modal com dados do ebook (detalhes)
@@ -68,10 +77,12 @@ function abrirCompartilhar(titulo, descricao, imagem) {
     // Exibir o modal
     modalCompartilhar.style.display = 'flex'
 
-    // Renderizar os ícones (garantir que apareçam)
-    renderizarIconesModal()
-    // Pequeno atraso para garantir que o DOM esteja completamente atualizado
-    setTimeout(renderizarIconesModal, 50)
+    // Garantir que o DOM esteja atualizado antes de renderizar os ícones
+    requestAnimationFrame(() => {
+        renderizarIconesModal()
+        // Pequeno atraso extra para casos de renderização lenta
+        setTimeout(renderizarIconesModal, 50)
+    })
 }
 
 // Função para compartilhar via rede específica
