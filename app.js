@@ -23,17 +23,17 @@ const compartilharMensagemPreview = document.getElementById('compartilharMensage
 const SITE_URL = 'https://mariocervo.github.io/site-de-teologia/'
 
 /**
- * Função que força a renderização dos ícones Lucide dentro do modal de compartilhamento.
- * Remove qualquer SVG anterior e recria os ícones apenas no escopo do modal.
+ * Força a renderização dos ícones Lucide dentro do modal de compartilhamento.
+ * Remove quaisquer SVGs existentes e recria os ícones a partir dos elementos <i data-lucide="...">.
  */
 function renderizarIconesModal() {
     if (!modalCompartilhar || typeof lucide === 'undefined') return
 
-    // Remove todos os SVGs que possam ter sido criados anteriormente dentro do modal
-    const svgsExistentes = modalCompartilhar.querySelectorAll('svg')
-    svgsExistentes.forEach(svg => svg.remove())
+    // Remove todos os SVGs que estejam dentro do modal
+    const svgs = modalCompartilhar.querySelectorAll('svg')
+    svgs.forEach(svg => svg.remove())
 
-    // Recria os ícones usando o modal como raiz
+    // Recria os ícones, escaneando apenas o modal
     lucide.createIcons({ root: modalCompartilhar })
 }
 
@@ -70,9 +70,8 @@ function abrirCompartilhar(titulo, descricao, imagem) {
 
     // Renderizar os ícones (garantir que apareçam)
     renderizarIconesModal()
-
-    // Pequeno atraso para garantir que o DOM esteja estável (fallback)
-    setTimeout(() => renderizarIconesModal(), 50)
+    // Pequeno atraso para garantir que o DOM esteja completamente atualizado
+    setTimeout(renderizarIconesModal, 50)
 }
 
 // Função para compartilhar via rede específica
