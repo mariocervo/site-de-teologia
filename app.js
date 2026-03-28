@@ -22,30 +22,6 @@ const compartilharMensagemPreview = document.getElementById('compartilharMensage
 // URL base do site (para compartilhamento)
 const SITE_URL = 'https://mariocervo.github.io/site-de-teologia/'
 
-/**
- * Força a renderização dos ícones Lucide dentro do modal de compartilhamento.
- * Remove quaisquer SVGs existentes e recria os ícones a partir dos elementos <i data-lucide="...">.
- */
-function renderizarIconesModal() {
-    if (!modalCompartilhar) {
-        console.warn('Modal de compartilhamento não encontrado')
-        return
-    }
-    if (typeof lucide === 'undefined') {
-        console.warn('Lucide não está carregado')
-        return
-    }
-
-    // Remove todos os SVGs que estejam dentro do modal (evita duplicação)
-    const svgs = modalCompartilhar.querySelectorAll('svg')
-    svgs.forEach(svg => svg.remove())
-    console.log(`Removidos ${svgs.length} SVGs antigos do modal`)
-
-    // Recria os ícones, escaneando apenas o modal
-    lucide.createIcons({ root: modalCompartilhar })
-    console.log('Ícones recriados dentro do modal')
-}
-
 // Função para abrir modal com dados do ebook (detalhes)
 function abrirDetalhes(titulo, descricaoLonga) {
     if (modalDetalhes) {
@@ -74,15 +50,7 @@ function abrirCompartilhar(titulo, descricao, imagem) {
     modalCompartilhar.dataset.imagem = imagem
     modalCompartilhar.dataset.link = link
 
-    // Exibir o modal
     modalCompartilhar.style.display = 'flex'
-
-    // Garantir que o DOM esteja atualizado antes de renderizar os ícones
-    requestAnimationFrame(() => {
-        renderizarIconesModal()
-        // Pequeno atraso extra para casos de renderização lenta
-        setTimeout(renderizarIconesModal, 50)
-    })
 }
 
 // Função para compartilhar via rede específica
@@ -292,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderCursos()
     renderArtigos()
     
-    // Atualizar ícones Lucide fora do modal (navbar, etc.)
+    // Atualizar ícones Lucide
     if (typeof lucide !== 'undefined') {
         lucide.createIcons()
     }
