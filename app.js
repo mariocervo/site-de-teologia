@@ -94,7 +94,14 @@ function compartilhar(rede) {
             url = `mailto:?subject=${encodeURIComponent('Compartilhamento de eBook')}&body=${textoEncoded}`
             break
         case 'instagram':
-            url = 'https://www.instagram.com/'
+            // Instagram não suporta pré‑preenchimento via URL.
+            // Abre a página inicial (desktop) ou tenta abrir o app (mobile).
+            const userAgent = navigator.userAgent.toLowerCase()
+            if (userAgent.includes('android') || userAgent.includes('iphone') || userAgent.includes('ipad')) {
+                url = 'instagram://' // tenta abrir o app
+            } else {
+                url = 'https://www.instagram.com/'
+            }
             break
         case 'facebook':
             url = `https://www.facebook.com/sharer/sharer.php?u=${linkEncoded}&quote=${textoEncoded}`
