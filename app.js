@@ -50,7 +50,13 @@ function abrirCompartilhar(titulo, descricao, imagem) {
     modalCompartilhar.dataset.imagem = imagem
     modalCompartilhar.dataset.link = link
 
+    // Exibir o modal
     modalCompartilhar.style.display = 'flex'
+
+    // 🔧 FORÇAR A RENDERIZAÇÃO DOS ÍCONES DO LUCIDE DENTRO DO MODAL
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons()
+    }
 }
 
 // Função para compartilhar via rede específica
